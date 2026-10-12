@@ -27,3 +27,8 @@ export default function Landing() {
           </div>
           <div className="trust-row"><CheckCircle2 size={16}/> Research-ready workflow <span/> <CheckCircle2 size={16}/> GeoTIFF-aware pipeline <span/> <CheckCircle2 size={16}/> Java API ready</div>
         </div>
+        <div className="hero-orbit">
+          <div className="orbit orbit-a"/><div className="orbit orbit-b"/>
+          <div className="earth">
+            <div className="continent c1"/><div className="continent c2"/><div className="continent c3"/>
+            <div className="cloud cloud-a"/><div className="cloud cloud-b"/>

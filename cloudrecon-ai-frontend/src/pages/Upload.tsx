@@ -10,3 +10,5 @@ export default function Upload(){
  return <div>
   <div className="page-heading"><div><div className="section-kicker">NEW ANALYSIS</div><h1>Upload satellite imagery</h1><p>Prepare a LISS-IV image for cloud detection and reconstruction.</p></div></div>
   <div className="upload-layout">
+   <section className="panel upload-panel">
+    {!file ? <div className={`dropzone ${drag?'drag':''}`} onDragOver={e=>{e.preventDefault();setDrag(true)}} onDragLeave={()=>setDrag(false)} onDrop={e=>{e.preventDefault();setDrag(false);choose(e.dataTransfer.files[0])}} onClick={()=>ref.current?.click()}>

@@ -15,5 +15,9 @@ public class JwtService {
     private final long ttlMs;
 
     public JwtService(@Value("${app.jwt-secret}") String secret, @Value("${app.jwt-ttl-hours}") long hours) {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        this.ttlMs = hours * 3_600_000L;
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+
+// TODO: Complete remaining logic for this module (WIP Week 6)

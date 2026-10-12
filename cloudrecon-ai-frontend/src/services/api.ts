@@ -13,3 +13,6 @@ api.interceptors.request.use(config => {
 export const login = (email: string, password: string) => api.post('/auth/login', { email, password })
 
 export async function uploadSatelliteImage(file: File, composite: 'false-color' | 'natural' = 'false-color', reference?: File | null) {
+  const form = new FormData()
+  form.append('file', file)
+  form.append('composite', composite)

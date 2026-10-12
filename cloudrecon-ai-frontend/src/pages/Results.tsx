@@ -24,3 +24,8 @@ export default function Results(){
  return <div>
   <div className="page-heading"><div><div className="section-kicker">RECONSTRUCTION RESULT</div><h1>{job.filename}</h1><p>{job.status} · {job.date} · {engineName(job.engine)}</p></div><div className="heading-actions"><button className="btn btn-ghost" onClick={()=>setView(v=>v==='output'?'mask':'output')}>{view==='output'?'Show cloud mask':'Show reconstruction'}</button><a className="btn btn-primary" href={downloadUrl(id)}><Download size={16}/> Export result</a></div></div>
   <div className="result-grid">
+   <section className="panel compare-panel"><div className="compare-toolbar"><span>Before / after comparison</span></div>
+    <div className="comparison" style={{position:'relative',display:'block',minHeight:380}}>
+     <img src={imageUrl(id,view)} alt="Result" style={fill}/>
+     <img src={imageUrl(id,'input')} alt="Original" style={{...fill,clipPath:`inset(0 ${100-split}% 0 0)`}}/>
+     <div style={{position:'absolute',top:0,bottom:0,left:split+'%',width:3,background:'#fff',pointerEvents:'none'}}/>

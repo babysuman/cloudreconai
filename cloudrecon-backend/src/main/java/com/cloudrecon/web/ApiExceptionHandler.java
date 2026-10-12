@@ -11,5 +11,8 @@ import java.util.Map;
 @RestControllerAdvice
 public class ApiExceptionHandler {
     @ExceptionHandler(ResponseStatusException.class)
+    ResponseEntity<Map<String, String>> status(ResponseStatusException e) {
+        return ResponseEntity.status(e.getStatusCode()).body(Map.of("error", String.valueOf(e.getReason())));
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+// TODO: Complete remaining logic for this module (WIP Week 6)

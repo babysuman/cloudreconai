@@ -18,5 +18,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     public JwtAuthFilter(JwtService jwt) { this.jwt = jwt; }
 
+    @Override
+    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
+            throws ServletException, IOException {
+        String token = null;
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+// TODO: Complete remaining logic for this module (WIP Week 6)

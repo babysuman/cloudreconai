@@ -6,3 +6,5 @@ numpy
 
 # OpenCV headless
 opencv-python-headless
+
+# PyTorch CPU-only — ~500 MB vs ~5 GB CUDA version

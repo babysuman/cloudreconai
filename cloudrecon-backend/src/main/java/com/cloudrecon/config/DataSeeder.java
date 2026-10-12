@@ -8,5 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
+public class DataSeeder {
+    /** Creates the demo account the frontend login form is pre-filled with. */
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+// TODO: Complete remaining logic for this module (WIP Week 6)

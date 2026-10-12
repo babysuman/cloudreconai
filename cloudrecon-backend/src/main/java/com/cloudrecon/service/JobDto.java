@@ -16,5 +16,8 @@ public record JobDto(String id, String code, String filename, String status, int
             DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm", Locale.ENGLISH).withZone(ZoneId.systemDefault());
 
     public static JobDto from(Job j) {
+        String status = switch (j.status) {
+            case COMPLETED -> "Completed";
+            case PROCESSING -> "Processing";
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+// TODO: Complete remaining logic for this module (WIP Week 6)

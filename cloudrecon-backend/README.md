@@ -19,3 +19,7 @@ Demo user (created on first start): `researcher@cloudrecon.ai` / `demo123`.
 | POST | /api/images/upload | multipart `file` → job |
 | POST | /api/analysis/start | `{imageId}` → starts processing |
 | GET | /api/analysis/{id} | status and stage (1 to 4) |
+| GET | /api/results/{id} | metrics |
+| GET | /api/results/{id}/{input\|mask\|output} | PNG (accepts `?token=`) |
+| GET | /api/results/{id}/download | reconstructed PNG as attachment |
+| GET | /api/history | the user's jobs |

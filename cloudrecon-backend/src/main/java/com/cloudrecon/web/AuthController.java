@@ -21,5 +21,10 @@ public class AuthController {
 
     public AuthController(UserRepository users, PasswordEncoder encoder, JwtService jwt) {
         this.users = users; this.encoder = encoder; this.jwt = jwt;
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+    @PostMapping("/login")
+    public AuthResponse login(@RequestBody LoginRequest r) {
+        AppUser u = users.findByEmail(r.email() == null ? "" : r.email().trim().toLowerCase()).orElse(null);
+
+// TODO: Complete remaining logic for this module (WIP Week 6)

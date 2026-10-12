@@ -7,5 +7,6 @@ import java.util.Optional;
 public final class Repos {
     private Repos() {}
 
+    public interface UserRepository extends JpaRepository<AppUser, Long> {
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+// TODO: Complete remaining logic for this module (WIP Week 6)

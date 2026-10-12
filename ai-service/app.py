@@ -183,5 +183,42 @@ def reconstruct(bgr: np.ndarray, mask: np.ndarray):
 def land_cover(bgr: np.ndarray, composite: str) -> dict:
     R, G, B = (bgr[:, :, 2].astype(np.float32), bgr[:, :, 1].astype(np.float32), bgr[:, :, 0].astype(np.float32))
     bright = (R + G + B) / 3
+    if composite == "false-color":      # LISS-IV FCC: red = NIR, green = Red band, blue = Green band
+        ndvi = (R - G) / (R + G + 1e-6)
+        veg = ndvi > 0.15
+        water = (~veg) & (R < 60)
+    else:                               # natural colour
+        veg = (G > R + 8) & (G > B + 4)
+        water = (~veg) & (bright < 95) & (B >= R - 5)
+    bare = ~(veg | water)
+    pct = lambda a: round(float(a.mean()) * 100, 1)
+    return {"vegetation": pct(veg), "water": pct(water), "bareBuilt": pct(bare)}
 
-# TODO: Implement rest of the logic (WIP Week 5)
+
+def build_report(filename, composite, coverage, cloud_removal, confidence, lc, shape, engine, ref_share=None):
+    if coverage < 10:
+        quality = "Good"
+    elif coverage < 40:
+        quality = "Moderate"
+    else:
+        quality = "Low: much of the scene is estimated"
+    if ref_share is not None and ref_share >= 0.8:
+        quality = "Good: filled from a real reference image"
+    obs = [f"{coverage}% of the scene was cloud covered and has been reconstructed; {cloud_removal}% of detected cloud was removed."]
+    if ref_share is not None:
+        obs.append(f"{round(ref_share * 100)}% of the reconstructed area was filled from the cloud-free reference image, so it shows real observations, not model guesses. These areas show the ground as it was on the reference date, so changes between the two dates (river course, sediment, crops, tide) are not reflected there.")
+    if lc["vegetation"] >= 40:
+        obs.append(f"Vegetation dominates the scene ({lc['vegetation']}%), which suggests cropland, forest or grassland.")
+    elif lc["vegetation"] >= 10:
+        obs.append(f"Vegetation covers {lc['vegetation']}% of the scene, mixed with other land cover.")
+    else:
+        obs.append(f"Vegetation is sparse ({lc['vegetation']}%).")
+    if lc["water"] >= 25:
+        obs.append(f"Water or very dark surface covers {lc['water']}% of the scene. Compare with an earlier date to check for flooding, waterlogging or reservoir change. Shadows and wet soil can be classed as water.")
+    elif lc["water"] >= 3:
+        obs.append(f"Water or dark surface covers {lc['water']}% of the scene (rivers, tanks or shadows).")
+    if lc["bareBuilt"] >= 50:
+        obs.append(f"Bare soil, fallow land or built-up area dominates ({lc['bareBuilt']}%).")
+    recs = []
+
+# TODO: Implement rest of the logic (WIP Week 6)

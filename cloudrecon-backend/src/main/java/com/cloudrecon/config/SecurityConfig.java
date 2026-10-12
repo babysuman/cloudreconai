@@ -25,5 +25,11 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Bean
+    SecurityFilterChain chain(HttpSecurity http, JwtAuthFilter jwt) throws Exception {
+        http.csrf(c -> c.disable())
+            .cors(Customizer.withDefaults())
+            .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(a -> a
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+// TODO: Complete remaining logic for this module (WIP Week 6)

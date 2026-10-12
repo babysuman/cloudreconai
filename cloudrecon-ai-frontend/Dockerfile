@@ -20,3 +20,7 @@ RUN printf 'server {\n\
   return 301 https://$host$request_uri;\n\
 }\n\
 server {\n\
+  listen 443 ssl;\n\
+  ssl_certificate /etc/letsencrypt/live/cloudreconai.mooo.com/fullchain.pem;\n\
+  ssl_certificate_key /etc/letsencrypt/live/cloudreconai.mooo.com/privkey.pem;\n\
+  ssl_protocols TLSv1.2 TLSv1.3;\n\

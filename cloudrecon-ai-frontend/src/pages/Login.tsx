@@ -11,3 +11,5 @@ export default function Login() {
 
   const submit=async(e:FormEvent)=>{e.preventDefault(); setError(''); try{const {data}=await login(email,password); localStorage.setItem('cloudrecon_token',data.token); navigate('/app')}catch{setError('Wrong email or password, or the server is not running.')}}
   return <div className="auth-page">
+    <div className="auth-visual"><div className="auth-orb"/><div className="auth-copy"><div className="brand"><div className="brand-mark"><Satellite/></div><strong>CloudRecon AI</strong></div><h1>Turn obscured imagery into usable insight.</h1><p>A professional workspace for cloud detection, AI reconstruction and satellite-image quality assessment.</p></div></div>
+    <div className="auth-panel">

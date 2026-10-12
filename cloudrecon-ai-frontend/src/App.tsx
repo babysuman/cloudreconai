@@ -43,3 +43,12 @@ function Shell() {
             </NavLink>
           ))}
         </nav>
+
+        <div className="side-label">SYSTEM</div>
+        <NavLink to="/app/settings" onClick={()=>setOpen(false)}><Settings size={18}/><span>Settings</span></NavLink>
+
+        <div className="sidebar-bottom">
+          <div className="storage-card">
+            <div className="storage-head"><Database size={15}/> Storage</div>
+            <div className="progress"><i style={{width:'38%'}}/></div>
+            <small>3.8 GB of 10 GB used</small>

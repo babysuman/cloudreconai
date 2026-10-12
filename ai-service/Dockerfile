@@ -11,3 +11,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 
 # Install CPU-only PyTorch first, then other requirements to guarantee no CUDA bloat
+RUN pip install --no-cache-dir --upgrade pip \
+ && pip install --no-cache-dir \
+    --extra-index-url https://download.pytorch.org/whl/cpu \

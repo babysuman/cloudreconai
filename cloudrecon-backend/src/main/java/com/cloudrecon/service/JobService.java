@@ -55,5 +55,16 @@ public class JobService {
             ImageIO.write(ref, "png", path(id, "reference").toFile());
         }
         return jobs.save(job);
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+    public Job start(String id, String owner) throws IOException {
+        Job job = owned(id, owner);
+        if (job.status == Job.Status.PROCESSING || job.status == Job.Status.QUEUED) return job;
+        job.status = Job.Status.QUEUED;
+        job.stage = 1;
+        job.error = null;
+        jobs.save(job);
+        BufferedImage img = ImageIO.read(path(id, "input").toFile());
+        Path rp = path(id, "reference");
+
+// TODO: Complete remaining logic for this module (WIP Week 6)

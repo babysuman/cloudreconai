@@ -48,5 +48,15 @@ public class ApiController {
     }
 
     @GetMapping("/analysis/{id}")
+    public JobDto analysis(@PathVariable String id, Authentication auth) {
+        return JobDto.from(jobs.owned(id, auth.getName()));
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+    @GetMapping("/results/{id}")
+    public JobDto result(@PathVariable String id, Authentication auth) {
+        return JobDto.from(jobs.owned(id, auth.getName()));
+    }
+
+    @GetMapping("/results/{id}/{kind}")
+
+// TODO: Complete remaining logic for this module (WIP Week 6)

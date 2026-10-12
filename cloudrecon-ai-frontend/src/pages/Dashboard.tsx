@@ -9,3 +9,5 @@ export default function Dashboard(){
  return <div>
   <div className="page-heading"><div><div className="section-kicker">OVERVIEW</div><h1>Satellite intelligence dashboard</h1><p>Monitor your imagery pipeline and reconstruction jobs.</p></div><Link className="btn btn-primary" to="/app/upload"><Sparkles size={17}/> New analysis</Link></div>
   <div className="stat-grid">
+   <Stat icon={Satellite} label="Images processed" value="128" trend="+14.2%" note="this month"/>
+   <Stat icon={Cloud} label="Avg. cloud coverage" value="42.8%" trend="-6.4%" note="vs last month"/>

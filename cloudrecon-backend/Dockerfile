@@ -13,3 +13,6 @@ RUN mvn -q package -DskipTests -B
 
 # ---- Stage 2: Runtime ----
 FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+
+# Non-root user for security

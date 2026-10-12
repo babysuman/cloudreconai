@@ -84,5 +84,22 @@ public class CloudEngine {
         boolean[] m = new boolean[px.length];
         for (int i = 0; i < px.length; i++) {
             int r = (px[i] >> 16) & 255, g = (px[i] >> 8) & 255, b = px[i] & 255;
+            int max = Math.max(r, Math.max(g, b)), min = Math.min(r, Math.min(g, b));
+            m[i] = min >= 170 && (max - min) <= 45;
+        }
+        return m;
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+    private boolean[] dilate(boolean[] m, int w, int h, int r) {
+        boolean[] a = new boolean[m.length], b = new boolean[m.length];
+        for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++)
+                for (int k = Math.max(0, x - r); k <= Math.min(w - 1, x + r) && !a[y * w + x]; k++)
+                    if (m[y * w + k]) a[y * w + x] = true;
+        for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++)
+                for (int k = Math.max(0, y - r); k <= Math.min(h - 1, y + r) && !b[y * w + x]; k++)
+                    if (a[k * w + x]) b[y * w + x] = true;
+        return b;
+
+// TODO: Complete remaining logic for this module (WIP Week 6)

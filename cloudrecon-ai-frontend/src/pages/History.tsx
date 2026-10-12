@@ -6,3 +6,4 @@ import { downloadUrl, getHistory } from '../services/api'
 export default function History(){
  const [rows,setRows]=useState<any[]>([]); const [q,setQ]=useState('')
  useEffect(()=>{ getHistory().then(r=>setRows(r.data)).catch(()=>{}) },[])
+ const shown=rows.filter(r=>(r.filename+r.code).toLowerCase().includes(q.toLowerCase()))

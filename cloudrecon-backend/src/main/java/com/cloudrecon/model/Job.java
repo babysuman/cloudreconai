@@ -14,5 +14,8 @@ public class Job {
     public String filename;
     @Enumerated(EnumType.STRING) public Status status = Status.UPLOADED;
     public int stage = 1;               // 1 validation, 2 detection, 3 reconstruction, 4 quality
+    public int width, height;
+    public double cloudCoverage;        // % of pixels masked
+    public double cloudRemoval;         // % of detected cloud removed
 
-// TODO: Complete remaining logic for this module (WIP Week 5)
+// TODO: Complete remaining logic for this module (WIP Week 6)
