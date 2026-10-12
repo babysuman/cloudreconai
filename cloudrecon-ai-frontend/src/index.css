@@ -1,0 +1,105 @@
+/* ============================================================
+   CloudRecon – Light Mode Design System
+   All class names preserved. Only colours & aesthetics changed.
+   ============================================================ */
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+
+  /* ── Palette ─────────────────────────────────────── */
+  --bg:      #f0f4f8;
+  --panel:   #ffffff;
+  --panel2:  #f7f9fc;
+  --line:    #dde3ed;
+  --text:    #1a2535;
+  --muted:   #64778f;
+  --cyan:    #0284c7;
+  --green:   #16a34a;
+  --accent:  #0ea5e9;
+  --accent2: #6366f1;
+  --shadow:  0 1px 4px #00000012, 0 4px 16px #00000008;
+  --shadow-md: 0 2px 12px #0000001a;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html   { scroll-behavior: smooth; }
+body   { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+a      { color: inherit; text-decoration: none; }
+
+/* ── Utilities ──────────────────────────────────────────────── */
+.eyebrow, .section-kicker {
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.btn {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 18px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  transition: all .18s;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  color: #fff;
+  box-shadow: 0 4px 16px #0ea5e940;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px #0ea5e950; }
+.btn-outline { border: 1.5px solid #bccfe0; background: #fff; color: var(--text); padding: 9px 15px; }
+.btn-outline:hover { background: #f0f6ff; border-color: var(--accent); color: var(--accent); }
+.btn-ghost { background: #fff; border: 1.5px solid #d4dce8; color: #3d5166; }
+.btn-ghost:hover { background: #f0f6ff; border-color: var(--accent); color: var(--accent); }
+.btn.full { width: 100%; padding: 13px; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+
+/* ============================================================
+   LANDING PAGE
+   ============================================================ */
+.landing {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #e8f4fd 0%, #f0f4f8 50%, #eef2fa 100%);
+}
+.landing-nav {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6vw;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #dde6f0;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.brand-mark {
+  width: 38px; height: 38px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  color: #fff;
+  box-shadow: 0 4px 14px #0ea5e940;
+}
+.brand strong { display: block; font-size: 15px; letter-spacing: .2px; color: var(--text); }
+.brand span   { display: block; color: var(--muted); font-size: 8px; letter-spacing: 2px; margin-top: 2px; }
+
+.landing-links {
