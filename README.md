@@ -19,13 +19,13 @@
 
 ### Team Members
 
-| Name | Role in Project | Email | GitHub |
-| :--- | :--- | :--- | :--- |
-| **Pragati Singh** (Member 1) | Frontend & UI/UX Design | `pragati.singh@cloudrecon.ai` | [@pragatisingh](https://github.com) |
-| **Mansi Gaur** (Member 2) | Backend (Spring Boot & Auth) | `mansi.gaur@cloudrecon.ai` | [@mansigaur](https://github.com) |
-| **Manvendra Singh** (Member 3 - **Team Lead**) | Database (MySQL & Storage) & Cloud Deployment | `manavvinaysingh8@gmail.com` | [@manvendrahub](https://github.com/manvendrahub) |
-| **Kalpana Dinodiya** (Member 4) | AI Integration (Python/FastAPI) | `kalpana.dinodiya@cloudrecon.ai` | [@kalpanadinodiya](https://github.com) |
-| **Kundan Suman** (Member 5) | Documentation, Analytics & Testing | `kundan.suman@cloudrecon.ai` | [@kundansuman](https://github.com) |
+| Member | Name | Role in Project |
+| :--- | :--- | :--- |
+| **Member 1** | **Pragati Singh** | Frontend & UI/UX Design |
+| **Member 2** | **Mansi Gaur** | Backend (Spring Boot & Auth) |
+| **Member 3** | **Manvendra Singh (Team Lead)** | Database (MySQL & Storage) & Cloud Deployment |
+| **Member 4** | **Kalpana Dinodiya** | AI Integration (Python/FastAPI) |
+| **Member 5** | **Kundan Suman** | Documentation, Analytics & Testing |
 
 ---
 
@@ -76,12 +76,12 @@ graph TD
     AIEngine["AI Tier: FastAPI (Python 3.11 - Port 8000)"]
     DataTier[("Database: MySQL 8.4 Enterprise")]
 
-    Client -->|HTTPS Request| Gateway
-    Gateway -->|Proxy API| AppTier
-    AppTier -->|Persist Metadata| DataTier
-    AppTier -->|Async Inpainting Request| AIEngine
-    AIEngine -->|Mask and Inpainted PNG| AppTier
-    AppTier -->|Save Rasters| Storage
+    Client --> Gateway
+    Gateway --> AppTier
+    AppTier --> DataTier
+    AppTier --> AIEngine
+    AIEngine --> AppTier
+    AppTier --> Storage
 ```
 
 ### Functional Modules
@@ -262,16 +262,16 @@ graph TD
     MaskGen --> CheckCloud{"Cloud Coverage > 2%?"}
     CheckCloud -->|No| SkipInpainting["Retain Scene Unaltered"]
     CheckCloud -->|Yes| CheckRef{"Cloud-Free Reference Available?"}
-    CheckRef -->|Yes| RefAlign["Phase Correlation & Affine Alignment"]
+    CheckRef -->|Yes| RefAlign["Phase Correlation and Affine Alignment"]
     RefAlign --> RefFill["Fill from Aligned Reference"]
-    CheckRef -->|No| Inpaint["Run Generative Inpainting (LaMa)"]
+    CheckRef -->|No| Inpaint["Run Generative Inpainting LaMa"]
     RefFill --> Blend["Mask-Aware Soft Blending"]
     Inpaint --> Blend
     SkipInpainting --> Blend
-    Blend --> ComputeMetrics["Compute Removal Rate, Land Cover & Confidence"]
+    Blend --> ComputeMetrics["Compute Removal Rate, Land Cover and Confidence"]
     ComputeMetrics --> QualityCheck{"Quality Acceptable?"}
-    QualityCheck -->|No (Retry)| Inpaint
-    QualityCheck -->|Yes| Export["Export Reconstructed GeoTIFF & Situation Report"]
+    QualityCheck -->|No - Retry| Inpaint
+    QualityCheck -->|Yes| Export["Export Reconstructed GeoTIFF and Situation Report"]
     Export --> EndNode["Processing Complete"]
 ```
 
