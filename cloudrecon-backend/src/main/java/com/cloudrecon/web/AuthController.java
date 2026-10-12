@@ -2,5 +2,10 @@ package com.cloudrecon.web;
 
 import com.cloudrecon.model.AppUser;
 import com.cloudrecon.model.Repos.UserRepository;
+import com.cloudrecon.security.JwtService;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-// TODO: Complete remaining logic for this module (WIP Week 1)
+// TODO: Complete remaining logic for this module (WIP Week 2)

@@ -1,5 +1,8 @@
 package com.cloudrecon.model;
 
 import jakarta.persistence.*;
+import java.time.Instant;
 
-// TODO: Complete remaining logic for this module (WIP Week 1)
+@Entity
+
+// TODO: Complete remaining logic for this module (WIP Week 2)
