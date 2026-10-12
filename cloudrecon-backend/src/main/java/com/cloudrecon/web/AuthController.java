@@ -8,4 +8,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-// TODO: Complete remaining logic for this module (WIP Week 2)
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+    public record LoginRequest(String email, String password) {}
+
+// TODO: Complete remaining logic for this module (WIP Week 3)

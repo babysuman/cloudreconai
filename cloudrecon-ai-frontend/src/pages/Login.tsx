@@ -3,3 +3,5 @@ import { Link, useNavigate } from 'react-router-dom'
 import { LockKeyhole, Mail, Satellite, ShieldCheck } from 'lucide-react'
 import { login } from '../services/api'
 
+export default function Login() {
+  const [email,setEmail]=useState('researcher@cloudrecon.ai')

@@ -6,3 +6,8 @@ COPY package*.json ./
 RUN npm ci --prefer-offline
 
 COPY . .
+# VITE_API_URL is baked in at build time; override via build-arg in docker-compose
+ARG VITE_API_URL=/api
+ENV VITE_API_URL=$VITE_API_URL
+RUN npm run build
+

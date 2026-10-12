@@ -6,3 +6,7 @@ REST API for the CloudRecon React frontend: JWT login, image upload, cloud remov
 ```
 mvn spring-boot:run          # http://localhost:8080
 ```
+Requires JDK 25 and Maven (or copy `mvnw`, `mvnw.cmd` and `.mvn` from another project and use `.\mvnw.cmd`).
+Then start the frontend: `npm install && npm run dev` (http://localhost:5173).
+
+Demo user (created on first start): `researcher@cloudrecon.ai` / `demo123`.

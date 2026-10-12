@@ -18,5 +18,15 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
-// TODO: Complete remaining logic for this module (WIP Week 2)
+@RestController
+@RequestMapping("/api")
+public class ApiController {
+    public record StartRequest(String imageId) {}
+    public record Activity(String day, long images) {}
+    public record Stats(long imagesProcessed, long completed, double avgCloudCoverage,
+
+// TODO: Complete remaining logic for this module (WIP Week 3)

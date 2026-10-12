@@ -10,3 +10,10 @@ Professional React + TypeScript frontend for:
 - TypeScript
 - Vite
 - React Router
+- Axios
+- Recharts
+- Lucide React
+- CSS (custom responsive design)
+
+## Run
+

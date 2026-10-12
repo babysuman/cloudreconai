@@ -32,5 +32,22 @@ public class CloudEngine {
     public record Result(BufferedImage output, BufferedImage mask, double coverage,
                          double cloudRemoval, double confidence, double score, String engine, String report) {}
 
+    private final String aiUrl;
 
-// TODO: Complete remaining logic for this module (WIP Week 2)
+    public CloudEngine(@Value("${app.ai-service-url:}") String aiUrl) {
+        this.aiUrl = aiUrl == null ? "" : aiUrl.trim();
+    }
+
+    public Result process(BufferedImage src, BufferedImage reference, String composite, String filename, IntConsumer stage) throws IOException {
+        int w = src.getWidth(), h = src.getHeight();
+        BufferedImage rgb = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = rgb.createGraphics();
+        g.drawImage(src, 0, 0, null);
+        g.dispose();
+
+        stage.accept(2);
+        boolean[] raw = detect(rgb, w, h);
+        boolean[] cloud = dilate(raw, w, h, 4);
+        long rawCount = count(raw), maskCount = count(cloud);
+
+// TODO: Complete remaining logic for this module (WIP Week 3)

@@ -9,3 +9,9 @@ export default function Landing() {
           <div className="brand-mark"><Satellite size={21}/></div>
           <div><strong>CloudRecon</strong><span>AI SATELLITE LAB</span></div>
         </div>
+        <div className="landing-links">
+          <a href="#technology">Technology</a><a href="#workflow">Workflow</a><a href="#about">About</a>
+          <Link className="btn btn-outline" to="/login">Sign in</Link>
+        </div>
+      </header>
+

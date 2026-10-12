@@ -8,3 +8,8 @@ const engineName=(e:string)=>({'generative-ai':'Generative AI (LaMa)','reference
 export default function Results(){
  const [params]=useSearchParams(); const id=params.get('job'); const navigate=useNavigate()
  const [job,setJob]=useState<any>(null); const [split,setSplit]=useState(50); const [view,setView]=useState<'output'|'mask'>('output')
+ useEffect(()=>{ if(id) getResult(id).then(r=>setJob(r.data)).catch(()=>{}) },[id])
+ const report=(()=>{ try{ return job?.report?JSON.parse(job.report):null }catch{ return null } })()
+ const saveReport=()=>{
+  if(!report) return
+  const li=(a:string[])=>a.map(x=>`<li>${x}</li>`).join('')

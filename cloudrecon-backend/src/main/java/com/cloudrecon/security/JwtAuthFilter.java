@@ -6,5 +6,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-// TODO: Complete remaining logic for this module (WIP Week 2)
+import java.io.IOException;
+
+// TODO: Complete remaining logic for this module (WIP Week 3)

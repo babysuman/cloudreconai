@@ -16,3 +16,12 @@ import './index.css'
 const nav = [
   {to:'/app', label:'Dashboard', icon:LayoutDashboard, end:true},
   {to:'/app/upload', label:'Upload imagery', icon:UploadCloud},
+  {to:'/app/analysis', label:'AI analysis', icon:Sparkles},
+  {to:'/app/results', label:'Results', icon:FileImage},
+  {to:'/app/history', label:'Processing history', icon:History},
+]
+
+function Shell() {
+  const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
+  const logout = () => { localStorage.removeItem('cloudrecon_token'); navigate('/') }

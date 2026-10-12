@@ -20,5 +20,17 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@Service
+public class JobService {
+    public static final Set<String> KINDS = Set.of("input", "mask", "output");
 
-// TODO: Complete remaining logic for this module (WIP Week 2)
+    private final JobRepository jobs;
+    private final CloudEngine engine;
+    private final Path dir;
+    private final ExecutorService pool = Executors.newFixedThreadPool(2);
+
+    public JobService(JobRepository jobs, CloudEngine engine, @Value("${app.storage-dir}") String storageDir) throws IOException {
+        this.jobs = jobs;
+        this.engine = engine;
+
+// TODO: Complete remaining logic for this module (WIP Week 3)
