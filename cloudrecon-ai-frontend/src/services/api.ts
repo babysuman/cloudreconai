@@ -25,3 +25,7 @@ export const getAnalysis = (id: string) => api.get(`/analysis/${id}`)
 export const getResult = (id: string) => api.get(`/results/${id}`)
 export const getHistory = () => api.get('/history')
 export const getStats = () => api.get('/dashboard/stats')
+
+const tokenQuery = () => `?token=${encodeURIComponent(localStorage.getItem('cloudrecon_token') || '')}`
+export const imageUrl = (id: string, kind: 'input' | 'mask' | 'output') => `${BASE}/results/${id}/${kind}${tokenQuery()}`
+export const downloadUrl = (id: string) => `${BASE}/results/${id}/download${tokenQuery()}`

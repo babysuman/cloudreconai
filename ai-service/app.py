@@ -331,5 +331,40 @@ def run_pipeline(bgr, ref, composite, filename):
         out, leftover, share, mask = fill_from_reference(bgr, ref, mask)
         if leftover.max() > 0:
             out, _ = reconstruct(out, leftover)
+        engine = "reference-fill"
+    else:
+        out, thick = dehaze_thin(bgr, mask)                    # thin cloud: remove the veil
+        if thick.max() > 0:                                    # thick cloud: reconstruct
+            out, used = reconstruct(out, thick)
+            engine = "dehaze+" + used
+            thick_share = float((thick > 0).sum()) / max(1, int((mask > 0).sum()))
+        else:
+            engine, thick_share = "dehaze", 0.0
 
-# TODO: Implement rest of the logic (WIP Week 9)
+    coverage = round(float((mask > 0).mean()) * 100, 1)
+    before, after = veil_level(bgr, mask), veil_level(out, mask)
+    removal = 100.0 if before <= 0 else round(max(0.0, min(100.0, 100 * (1 - after / before))), 1)
+    if share is not None:
+        confidence = 100 - 0.4 * coverage * (1 - share) - 0.05 * coverage * share
+    else:
+        confidence = 100 - 0.4 * coverage * min(1.0, thick_share) - 0.1 * coverage * (1 - min(1.0, thick_share))
+        if thick_share > 0 and not engine.endswith(("generative-ai", "gemini")):
+            confidence -= 10
+    confidence = round(max(0.0, min(100.0, confidence)), 1)
+    score = round((removal + confidence) / 2, 1)
+    report = build_report(filename, composite, coverage, removal, confidence, land_cover(out, composite), bgr.shape, engine, share)
+    return out, mask, coverage, removal, confidence, score, engine, report
+
+
+@app.post("/process")
+async def process(image: UploadFile = File(...), reference: UploadFile | None = File(None),
+                  composite: str = Form("false-color"), filename: str = Form("image")):
+    bgr = cv2.imdecode(np.frombuffer(await image.read(), np.uint8), cv2.IMREAD_COLOR)
+    ref = None
+    if reference is not None:
+        data = await reference.read()
+        if data:
+            ref = cv2.imdecode(np.frombuffer(data, np.uint8), cv2.IMREAD_COLOR)
+    out, mask, coverage, removal, confidence, score, engine, report = run_pipeline(bgr, ref, composite, filename)
+    return {"output_png_b64": b64png(out), "mask_png_b64": b64png(mask), "coverage": coverage,
+            "cloudRemoval": removal, "confidence": confidence, "score": score, "engine": engine, "report": report}

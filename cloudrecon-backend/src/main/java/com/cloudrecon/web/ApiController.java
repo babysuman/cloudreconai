@@ -88,5 +88,13 @@ public class ApiController {
         LocalDate today = LocalDate.now();
         ZoneId zone = ZoneId.systemDefault();
         List<Activity> activity = new ArrayList<>();
-
-// TODO: Complete remaining logic for this module (WIP Week 9)
+        for (int i = 6; i >= 0; i--) {
+            LocalDate d = today.minusDays(i);
+            long n = all.stream().filter(j -> j.createdAt.atZone(zone).toLocalDate().equals(d)).count();
+            DayOfWeek dow = d.getDayOfWeek();
+            activity.add(new Activity(dow.getDisplayName(TextStyle.SHORT, Locale.ENGLISH), n));
+        }
+        JobDto latest = done.isEmpty() ? null : JobDto.from(done.get(0));
+        return new Stats(all.size(), done.size(), Math.round(cloud * 10) / 10.0, Math.round(score * 10) / 10.0, latest, activity);
+    }
+}

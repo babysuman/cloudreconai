@@ -66,3 +66,11 @@ services:
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
     networks: [cloudrecon]
+
+volumes:
+  mysql_data:
+  satellite_files:
+
+networks:
+  cloudrecon:
+    driver: bridge

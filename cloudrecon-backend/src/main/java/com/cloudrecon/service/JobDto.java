@@ -30,5 +30,7 @@ public record JobDto(String id, String code, String filename, String status, int
     private static String duration(long ms, Job.Status s) {
         if (s == Job.Status.PROCESSING) return "Running";
         if (s == Job.Status.UPLOADED || s == Job.Status.QUEUED) return "Queued";
-
-// TODO: Complete remaining logic for this module (WIP Week 9)
+        long sec = ms / 1000;
+        return sec < 60 ? String.format(Locale.ENGLISH, "%.1fs", ms / 1000.0) : (sec / 60) + "m " + String.format("%02d", sec % 60) + "s";
+    }
+}

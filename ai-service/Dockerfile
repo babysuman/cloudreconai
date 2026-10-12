@@ -22,3 +22,6 @@ RUN pip install --no-cache-dir --upgrade pip \
 COPY app.py .
 
 EXPOSE 8000
+
+# 1 worker: optimal for 2 vCPU / 4 GB RAM on c7i.flex.large
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

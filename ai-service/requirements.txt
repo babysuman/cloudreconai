@@ -13,3 +13,5 @@ opencv-python-headless
 torch
 torchvision
 
+# LaMa generative inpainting (auto-detects CPU, no GPU needed)
+simple-lama-inpainting

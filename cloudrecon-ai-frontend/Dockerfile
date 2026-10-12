@@ -37,3 +37,8 @@ server {\n\
     client_max_body_size 512m;\n\
   }\n\
   location / {\n\
+    try_files $uri $uri/ /index.html;\n\
+  }\n\
+}\n' > /etc/nginx/conf.d/default.conf
+
+EXPOSE 80 443

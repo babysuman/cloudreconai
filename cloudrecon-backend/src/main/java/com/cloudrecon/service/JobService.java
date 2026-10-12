@@ -101,4 +101,14 @@ public class JobService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Job not found"));
     }
 
-// TODO: Complete remaining logic for this module (WIP Week 9)
+    public List<Job> history(String owner) { return jobs.findByOwnerOrderByCreatedAtDesc(owner); }
+
+    public Path imagePath(String id, String owner, String kind) {
+        owned(id, owner);
+        Path p = path(id, kind);
+        if (!KINDS.contains(kind) || !Files.exists(p)) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not available");
+        return p;
+    }
+
+    private Path path(String id, String kind) { return dir.resolve(id + "_" + kind + ".png"); }
+}

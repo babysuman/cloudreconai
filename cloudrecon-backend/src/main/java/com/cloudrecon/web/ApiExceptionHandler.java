@@ -22,5 +22,6 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     ResponseEntity<Map<String, String>> tooLarge(MaxUploadSizeExceededException e) {
-
-// TODO: Complete remaining logic for this module (WIP Week 9)
+        return ResponseEntity.status(413).body(Map.of("error", "File is larger than 500 MB."));
+    }
+}

@@ -13,3 +13,5 @@ cloudrecon-ai-frontend/dist/
 
 # Python
 ai-service/__pycache__/
+ai-service/*.pyc
+*.pyc

@@ -27,5 +27,7 @@ public class Job {
     @Lob public String report;                  // situation report as JSON
 
     protected Job() {}
-
-// TODO: Complete remaining logic for this module (WIP Week 9)
+    public Job(String id, String code, String owner, String filename) {
+        this.id = id; this.code = code; this.owner = owner; this.filename = filename;
+    }
+}

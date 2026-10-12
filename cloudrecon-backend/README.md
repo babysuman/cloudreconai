@@ -35,3 +35,8 @@ Demo user (created on first start): `researcher@cloudrecon.ai` / `demo123`.
 - Input: 8-bit TIFF, PNG, JPEG. 16-bit multi-band GeoTIFF needs GeoTools or GDAL.
 - The quality score is a heuristic, not SSIM against ground truth.
 - Uploads of hundreds of MB need more heap, for example `-Xmx4g`.
+
+## Version 2 additions
+- MySQL database (default). Use the `h2` profile if MySQL is not installed: `mvn spring-boot:run "-Dspring-boot.run.profiles=h2"`.
+- Python AI service (`ai-service/`) does cloud detection, LaMa generative reconstruction and the situation report.
+- Results page shows the situation report with HTML download and print.

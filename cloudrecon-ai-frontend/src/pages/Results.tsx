@@ -45,3 +45,9 @@ export default function Results(){
     {([['Vegetation',report.landCover.vegetation],['Water / dark',report.landCover.water],['Bare / built-up',report.landCover.bareBuilt],['Cloud rebuilt',report.landCover.cloud]] as [string,number][]).map(([k,v])=><div key={k} style={{borderLeft:'3px solid #38b6c8',paddingLeft:10}}><div style={{opacity:.7,fontSize:13}}>{k}</div><b style={{fontSize:22}}>{v}%</b></div>)}
    </div>
    <h3>Observations</h3><ul>{report.observations.map((o:string,i:number)=><li key={i}>{o}</li>)}</ul>
+   <h3>Recommendations</h3><ul>{report.recommendations.map((o:string,i:number)=><li key={i}>{o}</li>)}</ul>
+   <h3>Limitations</h3><ul style={{opacity:.75}}>{report.limitations.map((o:string,i:number)=><li key={i}>{o}</li>)}</ul>
+  </section> : <p className="demo-note" style={{marginTop:24}}>No situation report: the Python AI service was not running, so the weaker Java engine was used. Start the AI service and reprocess this image.</p>}
+  <div className="result-footer"><Link to="/app/upload">Process another image</Link><span>{job.width} × {job.height} px</span></div>
+ </div>
+}

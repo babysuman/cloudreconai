@@ -79,3 +79,13 @@ function Shell() {
   )
 }
 
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Landing/>}/>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/app/*" element={<Shell/>}/>
+      <Route path="*" element={<Navigate to="/" replace/>}/>
+    </Routes>
+  )
+}

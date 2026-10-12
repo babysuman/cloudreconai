@@ -19,3 +19,7 @@ export default function Upload(){
     <label style={{display:'block',margin:'12px 0'}}>Cloud-free reference image (optional, same area, another date) <input type="file" accept=".png,.jpg,.jpeg,.tif,.tiff" onChange={e=>setRefFile(e.target.files?.[0]??null)} style={{marginLeft:8}}/></label>
     {error && <p className="demo-note">{error}</p>}<div className="upload-actions"><button className="btn btn-ghost" onClick={()=>setFile(null)}>Clear</button><button disabled={!file||busy} className="btn btn-primary" onClick={run}><ArrowRight size={17}/> Start AI analysis</button></div>
    </section>
+   <aside className="panel requirements"><h3>Processing requirements</h3><div><CheckCircle2/> <span><b>Supported sensor</b><small>LISS-IV / compatible raster imagery</small></span></div><div><MapPinned/> <span><b>Geospatial data</b><small>Preserve metadata when available</small></span></div><div><CheckCircle2/> <span><b>AI pipeline</b><small>Cloud mask → reconstruction → QA</small></span></div><div><CheckCircle2/> <span><b>Output</b><small>Downloadable reconstructed raster</small></span></div></aside>
+  </div>
+ </div>
+}

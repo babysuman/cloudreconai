@@ -47,5 +47,9 @@ public class SecurityConfig {
         CorsConfiguration c = new CorsConfiguration();
         c.setAllowedOrigins(origins);
         c.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-
-// TODO: Complete remaining logic for this module (WIP Week 9)
+        c.setAllowedHeaders(List.of("*"));
+        UrlBasedCorsConfigurationSource src = new UrlBasedCorsConfigurationSource();
+        src.registerCorsConfiguration("/api/**", c);
+        return src;
+    }
+}

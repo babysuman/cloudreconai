@@ -948,3 +948,109 @@ tr:hover td { background: #f5f9ff; }
 /* ============================================================
    HISTORY PAGE
    ============================================================ */
+.history-tools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--line);
+  background: #f9fbfd;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 9px;
+  padding: 8px 12px;
+  width: 280px;
+  transition: border-color .15s;
+}
+.search-box:focus-within { border-color: var(--accent); }
+.search-box svg { color: var(--muted); }
+.search-box input {
+  background: none;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  font-size: 11px;
+  width: 100%;
+}
+.download-mini { background: none; border: 0; color: var(--accent); cursor: pointer; }
+.download-mini:hover { color: #0369a1; }
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+.empty-state {
+  min-height: 55vh;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+  color: var(--muted);
+}
+.empty-state h2 { color: var(--text); margin: 12px 0 8px; }
+.empty-state p  { font-size: 12px; }
+
+/* Overlay for mobile sidebar */
+.overlay { display: none; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1000px) {
+  .hero { padding: 65px 5vw; }
+  .hero h1 { font-size: 46px; }
+  .hero-orbit { width: 340px; height: 340px; }
+  .earth { width: 210px; height: 210px; }
+  .orbit-a { width: 330px; height: 135px; }
+  .orbit-b { width: 270px; height: 270px; }
+  .workflow { grid-template-columns: repeat(2, 1fr); }
+  .sidebar { transform: translateX(-100%); transition: transform .2s; }
+  .sidebar.open { transform: translateX(0); box-shadow: 4px 0 30px #00000020; }
+  .main-area { margin-left: 0; width: 100%; }
+  .menu-btn, .mobile-close { display: block; }
+  .menu-btn { margin-right: 10px; }
+  .topbar { justify-content: flex-start; }
+  .top-user { margin-left: auto; }
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.25);
+    z-index: 15;
+    backdrop-filter: blur(2px);
+  }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .dashboard-grid, .analysis-grid, .result-grid, .upload-layout { grid-template-columns: 1fr; }
+  .auth-page { grid-template-columns: 1fr; }
+  .auth-visual { display: none; }
+  .feature-strip { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 650px) {
+  .landing-nav { padding: 0 20px; }
+  .landing-links > a:not(.btn) { display: none; }
+  .hero { padding: 50px 22px; min-height: auto; }
+  .hero h1 { font-size: 38px; }
+  .hero-orbit { display: none; }
+  .trust-row { display: none; }
+  .workflow-section { padding: 60px 22px; }
+  .workflow-section h2 { font-size: 28px; }
+  .workflow { grid-template-columns: 1fr; }
+  footer { display: block; padding: 22px; }
+  .page-content { padding: 20px 14px; }
+  .page-heading { align-items: flex-start; flex-direction: column; }
+  .page-heading h1 { font-size: 22px; }
+  .stat-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+  .stat-card { padding: 13px; }
+  .stat-card > strong { font-size: 22px; }
+  .top-search { display: none; }
+  .comparison { height: 300px; }
+  .compare-caption { display: block; }
+  .compare-caption b { display: block; margin-top: 6px; }
+  .heading-actions { width: 100%; }
+  .heading-actions .btn { flex: 1; }
+}

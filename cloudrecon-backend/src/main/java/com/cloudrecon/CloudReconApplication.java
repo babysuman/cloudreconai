@@ -9,5 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(considerNestedRepositories = true)
 public class CloudReconApplication {
     public static void main(String[] args) {
-
-// TODO: Complete remaining logic for this module (WIP Week 9)
+        SpringApplication.run(CloudReconApplication.class, args);
+    }
+}

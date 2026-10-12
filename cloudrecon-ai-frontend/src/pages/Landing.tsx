@@ -50,3 +50,10 @@ export default function Landing() {
           {['Upload LISS-IV imagery','Detect clouds & generate mask','Run generative reconstruction','Review, compare & export'].map((x,i)=>(
             <div className="workflow-card" key={x}><span>0{i+1}</span><h3>{x}</h3><p>{['Upload imagery into a controlled processing workspace.','Estimate cloud coverage and isolate affected pixels.','Send the prepared input to your AI reconstruction service.','Inspect metrics and download the reconstructed output.'][i]}</p></div>
           ))}
+        </div>
+      </section>
+
+      <footer id="about"><div className="brand"><div className="brand-mark"><Satellite size={18}/></div><strong>CloudRecon AI</strong></div><span>Generative cloud removal & reconstruction for LISS-IV imagery.</span></footer>
+    </div>
+  )
+}

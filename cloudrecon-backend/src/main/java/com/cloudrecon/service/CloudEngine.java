@@ -152,5 +152,21 @@ public class CloudEngine {
         parts.add("image", named(rgb, "image.png"));
         if (reference != null) parts.add("reference", named(reference, "reference.png"));
         parts.add("composite", composite);
-
-// TODO: Complete remaining logic for this module (WIP Week 9)
+        parts.add("filename", filename);
+        // Force HTTP/1.1: the JDK client's HTTP/2 upgrade attempt confuses uvicorn.
+        RestClient client = RestClient.builder()
+                .requestFactory(new JdkClientHttpRequestFactory(HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).build()))
+                .build();
+        JsonNode res = client.post()
+                .uri(aiUrl + "/process")
+                .contentType(MediaType.MULTIPART_FORM_DATA).body(parts)
+                .retrieve().body(JsonNode.class);
+        if (res == null) throw new IOException("AI service returned nothing");
+        BufferedImage out = ImageIO.read(new ByteArrayInputStream(Base64.getDecoder().decode(res.get("output_png_b64").asText())));
+        BufferedImage mask = ImageIO.read(new ByteArrayInputStream(Base64.getDecoder().decode(res.get("mask_png_b64").asText())));
+        if (out == null || mask == null) throw new IOException("AI service returned an invalid image");
+        return new Result(out, mask, res.get("coverage").asDouble(), res.get("cloudRemoval").asDouble(),
+                res.get("confidence").asDouble(), res.get("score").asDouble(), res.get("engine").asText(),
+                res.get("report").toString());
+    }
+}

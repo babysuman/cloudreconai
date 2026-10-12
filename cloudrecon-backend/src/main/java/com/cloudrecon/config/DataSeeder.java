@@ -16,5 +16,6 @@ public class DataSeeder {
             if (users.findByEmail("researcher@cloudrecon.ai").isEmpty()) {
                 users.save(new AppUser("researcher@cloudrecon.ai", encoder.encode("demo123"), "Research User"));
             }
-
-// TODO: Complete remaining logic for this module (WIP Week 9)
+        };
+    }
+}

@@ -25,3 +25,6 @@ RUN mkdir -p /app/data/files && chown -R appuser:appgroup /app/data
 VOLUME /app/data
 
 USER appuser
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

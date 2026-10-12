@@ -55,3 +55,10 @@ Expected backend endpoints can be added around:
 - `GET /api/results/{id}`
 - `GET /api/history`
 
+The current login and dashboard use demo/local data so the UI works immediately without a backend.
+
+## Backend connection (updated)
+
+Login, upload, analysis, results and history now call the Java backend at `http://localhost:8080/api`.
+Demo login: `researcher@cloudrecon.ai` / `demo123`. Start the backend first, then `npm run dev`.
+The dashboard page still shows demo numbers; use `GET /api/dashboard/stats` to wire it.

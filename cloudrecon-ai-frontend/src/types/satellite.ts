@@ -7,3 +7,5 @@ export interface SatelliteJob {
   cloudCoverage: number
   reconstructionScore: number
   date: string
+  duration?: string
+}

@@ -21,3 +21,7 @@ export default function Login() {
           <button className="btn btn-primary full">Sign in to workspace</button>
         </form>
         {error && <small className="demo-note">{error}</small>}
+      </div>
+    </div>
+  </div>
+}

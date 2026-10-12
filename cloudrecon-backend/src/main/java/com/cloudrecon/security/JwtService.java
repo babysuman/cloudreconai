@@ -29,5 +29,7 @@ public class JwtService {
         try {
             return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload().getSubject();
         } catch (Exception e) {
-
-// TODO: Complete remaining logic for this module (WIP Week 9)
+            return null;
+        }
+    }
+}

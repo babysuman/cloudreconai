@@ -40,5 +40,8 @@ public class AuthController {
         String email = r.email().trim().toLowerCase();
         if (users.findByEmail(email).isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "An account with this email already exists");
-
-// TODO: Complete remaining logic for this module (WIP Week 9)
+        }
+        AppUser u = users.save(new AppUser(email, encoder.encode(r.password()), r.name() == null ? email : r.name()));
+        return new AuthResponse(jwt.create(u.email), u.email, u.name);
+    }
+}
