@@ -5,5 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public final class Repos {
+    private Repos() {}
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+
+// TODO: Complete remaining logic for this module (WIP Week 5)

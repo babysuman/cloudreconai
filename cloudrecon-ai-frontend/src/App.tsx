@@ -34,3 +34,12 @@ function Shell() {
           <div><strong>CloudRecon</strong><span>AI SATELLITE LAB</span></div>
           <button className="icon-btn mobile-close" onClick={()=>setOpen(false)}><X/></button>
         </div>
+
+        <div className="side-label">WORKSPACE</div>
+        <nav>
+          {nav.map(({to,label,icon:Icon,end}) => (
+            <NavLink key={to} to={to} end={end} onClick={()=>setOpen(false)}>
+              <Icon size={18}/><span>{label}</span>
+            </NavLink>
+          ))}
+        </nav>

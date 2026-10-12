@@ -8,5 +8,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
+@RestControllerAdvice
+public class ApiExceptionHandler {
+    @ExceptionHandler(ResponseStatusException.class)
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+// TODO: Complete remaining logic for this module (WIP Week 5)

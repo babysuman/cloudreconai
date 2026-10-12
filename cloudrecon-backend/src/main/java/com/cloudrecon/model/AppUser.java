@@ -6,5 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "users")
 public class AppUser {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
+    @Column(unique = true, nullable = false)
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+// TODO: Complete remaining logic for this module (WIP Week 5)

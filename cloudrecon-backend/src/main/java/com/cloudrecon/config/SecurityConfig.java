@@ -21,4 +21,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+
+// TODO: Complete remaining logic for this module (WIP Week 5)

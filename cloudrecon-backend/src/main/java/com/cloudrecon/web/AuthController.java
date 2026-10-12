@@ -16,5 +16,10 @@ public class AuthController {
     public record AuthResponse(String token, String email, String name) {}
 
     private final UserRepository users;
+    private final PasswordEncoder encoder;
+    private final JwtService jwt;
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+    public AuthController(UserRepository users, PasswordEncoder encoder, JwtService jwt) {
+        this.users = users; this.encoder = encoder; this.jwt = jwt;
+
+// TODO: Complete remaining logic for this module (WIP Week 5)

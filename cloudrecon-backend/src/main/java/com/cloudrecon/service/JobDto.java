@@ -12,5 +12,9 @@ public record JobDto(String id, String code, String filename, String status, int
                      int width, int height, String engine, String date, String duration, String error,
                      String composite, String report) {
 
+    private static final DateTimeFormatter FMT =
+            DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm", Locale.ENGLISH).withZone(ZoneId.systemDefault());
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+    public static JobDto from(Job j) {
+
+// TODO: Complete remaining logic for this module (WIP Week 5)

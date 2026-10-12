@@ -7,4 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+@Configuration
+
+// TODO: Complete remaining logic for this module (WIP Week 5)

@@ -21,3 +21,9 @@ export default function Landing() {
           <div className="eyebrow"><Sparkles size={15}/> GENERATIVE AI FOR EARTH OBSERVATION</div>
           <h1>See beyond the clouds with <em>AI reconstruction.</em></h1>
           <p>CloudRecon restores cloud-obscured LISS-IV satellite imagery using an AI-assisted reconstruction pipeline, helping researchers explore clearer land-surface information.</p>
+          <div className="hero-actions">
+            <Link className="btn btn-primary" to="/login">Open workspace <ArrowRight size={17}/></Link>
+            <a className="btn btn-ghost" href="#technology">Explore technology</a>
+          </div>
+          <div className="trust-row"><CheckCircle2 size={16}/> Research-ready workflow <span/> <CheckCircle2 size={16}/> GeoTIFF-aware pipeline <span/> <CheckCircle2 size={16}/> Java API ready</div>
+        </div>

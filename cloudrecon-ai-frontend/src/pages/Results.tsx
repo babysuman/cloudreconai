@@ -19,3 +19,8 @@ export default function Results(){
  }
  if(!id) return <div className="empty-state"><h2>No result selected</h2><p>Open a job from your history, or <Link to="/app/upload">upload an image</Link>.</p></div>
  if(!job) return <div className="empty-state"><h2>Loading result…</h2></div>
+ const fill:CSSProperties={position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'contain'}
+ const reprocess=async()=>{ await startAnalysis(id); navigate('/app/analysis?job='+id) }
+ return <div>
+  <div className="page-heading"><div><div className="section-kicker">RECONSTRUCTION RESULT</div><h1>{job.filename}</h1><p>{job.status} · {job.date} · {engineName(job.engine)}</p></div><div className="heading-actions"><button className="btn btn-ghost" onClick={()=>setView(v=>v==='output'?'mask':'output')}>{view==='output'?'Show cloud mask':'Show reconstruction'}</button><a className="btn btn-primary" href={downloadUrl(id)}><Download size={16}/> Export result</a></div></div>
+  <div className="result-grid">

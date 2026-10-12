@@ -12,5 +12,8 @@ import java.util.Date;
 @Service
 public class JwtService {
     private final SecretKey key;
+    private final long ttlMs;
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+    public JwtService(@Value("${app.jwt-secret}") String secret, @Value("${app.jwt-ttl-hours}") long hours) {
+
+// TODO: Complete remaining logic for this module (WIP Week 5)

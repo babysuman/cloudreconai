@@ -4,3 +4,5 @@
 # Docker generated files
 *.log
 
+# Java build artifacts
+cloudrecon-backend/target/

@@ -14,5 +14,9 @@ import java.util.List;
 
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
+    private final JwtService jwt;
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+    public JwtAuthFilter(JwtService jwt) { this.jwt = jwt; }
+
+
+// TODO: Complete remaining logic for this module (WIP Week 5)

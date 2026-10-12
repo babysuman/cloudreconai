@@ -7,3 +7,5 @@ const recent=[['LISS-IV_RJ_042.tif','Completed','92.8%','2m 14s'],['LISS-IV_RJ_0
 
 export default function Dashboard(){
  return <div>
+  <div className="page-heading"><div><div className="section-kicker">OVERVIEW</div><h1>Satellite intelligence dashboard</h1><p>Monitor your imagery pipeline and reconstruction jobs.</p></div><Link className="btn btn-primary" to="/app/upload"><Sparkles size={17}/> New analysis</Link></div>
+  <div className="stat-grid">

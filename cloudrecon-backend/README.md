@@ -14,3 +14,8 @@ Demo user (created on first start): `researcher@cloudrecon.ai` / `demo123`.
 ## Endpoints (all except /auth need `Authorization: Bearer <token>`)
 | Method | Path | Purpose |
 |---|---|---|
+| POST | /api/auth/login | `{email,password}` → `{token,email,name}` |
+| POST | /api/auth/register | `{name,email,password}` |
+| POST | /api/images/upload | multipart `file` → job |
+| POST | /api/analysis/start | `{imageId}` → starts processing |
+| GET | /api/analysis/{id} | status and stage (1 to 4) |

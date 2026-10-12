@@ -43,5 +43,17 @@ public class JobService {
         }
         String id = UUID.randomUUID().toString();
         String code = "CR-%d-%04d".formatted(Year.now().getValue(), jobs.count() + 1);
+        String name = file.getOriginalFilename() == null ? "image" : file.getOriginalFilename();
+        Job job = new Job(id, code, owner, name);
+        job.composite = "natural".equals(composite) ? "natural" : "false-color";
+        job.width = img.getWidth();
+        job.height = img.getHeight();
+        ImageIO.write(img, "png", path(id, "input").toFile());
+        if (reference != null && !reference.isEmpty()) {
+            BufferedImage ref = ImageIO.read(reference.getInputStream());
+            if (ref == null) throw new IllegalArgumentException("Unsupported reference image. Use PNG, JPG or 8-bit TIFF.");
+            ImageIO.write(ref, "png", path(id, "reference").toFile());
+        }
+        return jobs.save(job);
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+// TODO: Complete remaining logic for this module (WIP Week 5)

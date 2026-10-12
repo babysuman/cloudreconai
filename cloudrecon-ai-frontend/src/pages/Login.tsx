@@ -8,3 +8,6 @@ export default function Login() {
   const [password,setPassword]=useState('demo123')
   const navigate=useNavigate()
   const [error,setError]=useState('')
+
+  const submit=async(e:FormEvent)=>{e.preventDefault(); setError(''); try{const {data}=await login(email,password); localStorage.setItem('cloudrecon_token',data.token); navigate('/app')}catch{setError('Wrong email or password, or the server is not running.')}}
+  return <div className="auth-page">

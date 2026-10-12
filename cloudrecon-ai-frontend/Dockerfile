@@ -15,3 +15,8 @@ RUN npm run build
 FROM nginx:1.27-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 
+RUN printf 'server {\n\
+  listen 80;\n\
+  return 301 https://$host$request_uri;\n\
+}\n\
+server {\n\

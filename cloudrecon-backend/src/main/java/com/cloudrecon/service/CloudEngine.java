@@ -66,5 +66,23 @@ public class CloudEngine {
         String engine = "java-diffusion";
 
         stage.accept(4);
+        long residual = count(detect(out, out.getWidth(), out.getHeight()));
+        double coverage = 100.0 * maskCount / cloud.length;
+        double removal = rawCount == 0 ? 100 : clamp(100.0 * (1 - (double) residual / rawCount));
+        double confidence = clamp(100 - 0.4 * coverage);   // heuristic: less cloud = more known context
+        double score = (removal + confidence) / 2;
+        return new Result(out, mask, round(coverage), round(removal), round(confidence), round(score), engine, null);
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+    private static double clamp(double v) { return Math.max(0, Math.min(100, v)); }
+    private static double round(double v) { return Math.round(v * 10) / 10.0; }
+
+    private static long count(boolean[] a) { long n = 0; for (boolean b : a) if (b) n++; return n; }
+
+    private boolean[] detect(BufferedImage img, int w, int h) {
+        int[] px = img.getRGB(0, 0, w, h, null, 0, w);
+        boolean[] m = new boolean[px.length];
+        for (int i = 0; i < px.length; i++) {
+            int r = (px[i] >> 16) & 255, g = (px[i] >> 8) & 255, b = px[i] & 255;
+
+// TODO: Complete remaining logic for this module (WIP Week 5)

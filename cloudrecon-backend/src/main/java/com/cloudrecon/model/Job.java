@@ -11,5 +11,8 @@ public class Job {
     @Id public String id;
     public String code;                 // e.g. CR-2026-0004
     public String owner;                // user email
+    public String filename;
+    @Enumerated(EnumType.STRING) public Status status = Status.UPLOADED;
+    public int stage = 1;               // 1 validation, 2 detection, 3 reconstruction, 4 quality
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+// TODO: Complete remaining logic for this module (WIP Week 5)

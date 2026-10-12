@@ -28,3 +28,11 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/${MYSQL_DATABASE}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USER:              ${DB_USER}
+      DB_PASSWORD:          ${DB_PASSWORD}
+      JWT_SECRET:           ${JWT_SECRET}
+      AI_SERVICE_URL:       http://ai-service:8000
+      APP_CORS_ORIGINS:     ${CORS_ORIGINS}
+    volumes:

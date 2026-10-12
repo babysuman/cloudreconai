@@ -38,5 +38,15 @@ public class ApiController {
     public JobDto upload(@RequestParam("file") MultipartFile file,
                          @RequestParam(value = "composite", defaultValue = "false-color") String composite,
                          @RequestParam(value = "reference", required = false) MultipartFile reference,
+                         Authentication auth) throws IOException {
+        return JobDto.from(jobs.upload(file, auth.getName(), composite, reference));
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 4)
+    @PostMapping("/analysis/start")
+    public JobDto start(@RequestBody StartRequest r, Authentication auth) throws IOException {
+        return JobDto.from(jobs.start(r.imageId(), auth.getName()));
+    }
+
+    @GetMapping("/analysis/{id}")
+
+// TODO: Complete remaining logic for this module (WIP Week 5)
