@@ -5,3 +5,6 @@ import { login } from '../services/api'
 
 export default function Login() {
   const [email,setEmail]=useState('researcher@cloudrecon.ai')
+  const [password,setPassword]=useState('demo123')
+  const navigate=useNavigate()
+  const [error,setError]=useState('')

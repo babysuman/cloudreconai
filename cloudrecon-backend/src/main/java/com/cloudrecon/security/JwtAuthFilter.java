@@ -10,5 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
-// TODO: Complete remaining logic for this module (WIP Week 3)
+@Component
+public class JwtAuthFilter extends OncePerRequestFilter {
+
+// TODO: Complete remaining logic for this module (WIP Week 4)

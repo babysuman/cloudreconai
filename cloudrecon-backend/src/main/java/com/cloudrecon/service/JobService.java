@@ -32,5 +32,16 @@ public class JobService {
     public JobService(JobRepository jobs, CloudEngine engine, @Value("${app.storage-dir}") String storageDir) throws IOException {
         this.jobs = jobs;
         this.engine = engine;
+        this.dir = Path.of(storageDir);
+        Files.createDirectories(dir);
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 3)
+    public Job upload(MultipartFile file, String owner, String composite, MultipartFile reference) throws IOException {
+        BufferedImage img = ImageIO.read(file.getInputStream());
+        if (img == null) {
+            throw new IllegalArgumentException("Unsupported file. Upload an 8-bit TIFF, PNG or JPEG image.");
+        }
+        String id = UUID.randomUUID().toString();
+        String code = "CR-%d-%04d".formatted(Year.now().getValue(), jobs.count() + 1);
+
+// TODO: Complete remaining logic for this module (WIP Week 4)

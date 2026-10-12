@@ -12,5 +12,9 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/api/auth")
 public class AuthController {
     public record LoginRequest(String email, String password) {}
+    public record RegisterRequest(String name, String email, String password) {}
+    public record AuthResponse(String token, String email, String name) {}
 
-// TODO: Complete remaining logic for this module (WIP Week 3)
+    private final UserRepository users;
+
+// TODO: Complete remaining logic for this module (WIP Week 4)

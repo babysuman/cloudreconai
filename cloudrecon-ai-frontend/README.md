@@ -17,3 +17,9 @@ Professional React + TypeScript frontend for:
 
 ## Run
 
+```bash
+npm install
+npm run dev
+```
+
+Open the URL shown by Vite, normally:

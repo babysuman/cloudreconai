@@ -10,3 +10,7 @@ Requires JDK 25 and Maven (or copy `mvnw`, `mvnw.cmd` and `.mvn` from another pr
 Then start the frontend: `npm install && npm run dev` (http://localhost:5173).
 
 Demo user (created on first start): `researcher@cloudrecon.ai` / `demo123`.
+
+## Endpoints (all except /auth need `Authorization: Bearer <token>`)
+| Method | Path | Purpose |
+|---|---|---|

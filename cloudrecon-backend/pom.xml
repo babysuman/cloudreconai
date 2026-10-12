@@ -8,3 +8,6 @@
     <version>3.5.16</version>
     <relativePath/>
   </parent>
+  <groupId>com.cloudrecon</groupId>
+  <artifactId>cloudrecon-backend</artifactId>
+  <version>1.0.0</version>

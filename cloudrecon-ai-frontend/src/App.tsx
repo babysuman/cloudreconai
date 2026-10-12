@@ -25,3 +25,12 @@ function Shell() {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
   const logout = () => { localStorage.removeItem('cloudrecon_token'); navigate('/') }
+
+  return (
+    <div className="app-shell">
+      <aside className={`sidebar ${open ? 'open' : ''}`}>
+        <div className="brand">
+          <div className="brand-mark"><Satellite size={21}/></div>
+          <div><strong>CloudRecon</strong><span>AI SATELLITE LAB</span></div>
+          <button className="icon-btn mobile-close" onClick={()=>setOpen(false)}><X/></button>
+        </div>

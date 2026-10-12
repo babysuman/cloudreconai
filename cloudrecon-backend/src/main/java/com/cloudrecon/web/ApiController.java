@@ -28,5 +28,15 @@ public class ApiController {
     public record StartRequest(String imageId) {}
     public record Activity(String day, long images) {}
     public record Stats(long imagesProcessed, long completed, double avgCloudCoverage,
+                        double avgReconstruction, JobDto latest, List<Activity> activity) {}
 
-// TODO: Complete remaining logic for this module (WIP Week 3)
+    private final JobService jobs;
+
+    public ApiController(JobService jobs) { this.jobs = jobs; }
+
+    @PostMapping("/images/upload")
+    public JobDto upload(@RequestParam("file") MultipartFile file,
+                         @RequestParam(value = "composite", defaultValue = "false-color") String composite,
+                         @RequestParam(value = "reference", required = false) MultipartFile reference,
+
+// TODO: Complete remaining logic for this module (WIP Week 4)

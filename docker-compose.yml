@@ -20,3 +20,11 @@ services:
     networks: [cloudrecon]
 
   # ── Spring Boot backend ─────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./cloudrecon-backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy

@@ -15,3 +15,9 @@ export default function Landing() {
         </div>
       </header>
 
+      <section className="hero">
+        <div className="hero-grid"/>
+        <div className="hero-copy">
+          <div className="eyebrow"><Sparkles size={15}/> GENERATIVE AI FOR EARTH OBSERVATION</div>
+          <h1>See beyond the clouds with <em>AI reconstruction.</em></h1>
+          <p>CloudRecon restores cloud-obscured LISS-IV satellite imagery using an AI-assisted reconstruction pipeline, helping researchers explore clearer land-surface information.</p>

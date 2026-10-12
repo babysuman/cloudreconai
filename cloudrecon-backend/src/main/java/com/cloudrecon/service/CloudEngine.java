@@ -49,5 +49,22 @@ public class CloudEngine {
         boolean[] raw = detect(rgb, w, h);
         boolean[] cloud = dilate(raw, w, h, 4);
         long rawCount = count(raw), maskCount = count(cloud);
+        BufferedImage mask = new BufferedImage(w, h, BufferedImage.TYPE_BYTE_GRAY);
+        for (int i = 0; i < cloud.length; i++) mask.getRaster().setSample(i % w, i / w, 0, cloud[i] ? 255 : 0);
 
-// TODO: Complete remaining logic for this module (WIP Week 3)
+        stage.accept(3);
+        // Preferred path: the Python AI service does detection, generative reconstruction and the report.
+        if (!aiUrl.isEmpty()) {
+            try {
+                stage.accept(4);
+                return remote(rgb, reference, composite, filename);
+            } catch (Exception e) {
+                System.err.println("AI service failed, using the Java fallback engine: " + e.getMessage());
+            }
+        }
+        BufferedImage out = inpaint(rgb, cloud, w, h);
+        String engine = "java-diffusion";
+
+        stage.accept(4);
+
+// TODO: Complete remaining logic for this module (WIP Week 4)

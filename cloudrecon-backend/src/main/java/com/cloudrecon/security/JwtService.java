@@ -9,4 +9,8 @@ import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
-// TODO: Complete remaining logic for this module (WIP Week 3)
+@Service
+public class JwtService {
+    private final SecretKey key;
+
+// TODO: Complete remaining logic for this module (WIP Week 4)
