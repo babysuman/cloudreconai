@@ -19,3 +19,6 @@ WORKDIR /app
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 COPY --from=build /app/target/*.jar app.jar
+
+# Directory for uploaded satellite files
+RUN mkdir -p /app/data/files && chown -R appuser:appgroup /app/data

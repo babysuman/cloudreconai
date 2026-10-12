@@ -13,4 +13,6 @@ public class AppUser {
     public String passwordHash;
     public String name;
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+    protected AppUser() {}
+
+// TODO: Complete remaining logic for this module (WIP Week 8)

@@ -23,5 +23,8 @@ public record JobDto(String id, String code, String filename, String status, int
             default -> "Queued";
         };
         return new JobDto(j.id, j.code, j.filename, status, j.stage, j.cloudCoverage, j.cloudRemoval,
+                j.confidence, j.reconstructionScore, j.width, j.height, j.engine,
+                FMT.format(j.createdAt), duration(j.durationMs, j.status), j.error, j.composite, j.report);
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+// TODO: Complete remaining logic for this module (WIP Week 8)

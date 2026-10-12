@@ -16,3 +16,5 @@ export default function Login() {
       <Link className="back-link" to="/">← Back to home</Link>
       <div className="auth-form"><div className="auth-icon"><ShieldCheck/></div><div className="section-kicker">SECURE WORKSPACE</div><h2>Welcome back</h2><p>Sign in to continue your satellite analysis.</p>
         <form onSubmit={submit}>
+          <label>Email<input value={email} onChange={e=>setEmail(e.target.value)} type="email" required/><Mail/></label>
+          <label>Password<input value={password} onChange={e=>setPassword(e.target.value)} type="password" required/><LockKeyhole/></label>

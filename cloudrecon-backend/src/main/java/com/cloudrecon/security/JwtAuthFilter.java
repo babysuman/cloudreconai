@@ -26,5 +26,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith("Bearer ")) {
             token = header.substring(7);
         } else if ("GET".equals(req.getMethod()) && req.getRequestURI().startsWith("/api/results/")) {
+            token = req.getParameter("token"); // lets <img src> and download links authenticate
+        }
+        if (token != null) {
+            String email = jwt.verify(token);
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+// TODO: Complete remaining logic for this module (WIP Week 8)

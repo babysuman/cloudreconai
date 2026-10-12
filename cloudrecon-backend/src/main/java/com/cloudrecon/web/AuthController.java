@@ -30,5 +30,10 @@ public class AuthController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong email or password");
         }
         return new AuthResponse(jwt.create(u.email), u.email, u.name);
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+    @PostMapping("/register")
+    public AuthResponse register(@RequestBody RegisterRequest r) {
+        if (r.email() == null || !r.email().contains("@") || r.password() == null || r.password().length() < 6) {
+
+// TODO: Complete remaining logic for this module (WIP Week 8)

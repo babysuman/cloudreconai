@@ -16,5 +16,8 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
+    ResponseEntity<Map<String, String>> badRequest(IllegalArgumentException e) {
+        return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+// TODO: Complete remaining logic for this module (WIP Week 8)

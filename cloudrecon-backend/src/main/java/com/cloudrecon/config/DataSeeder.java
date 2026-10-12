@@ -12,5 +12,7 @@ public class DataSeeder {
     /** Creates the demo account the frontend login form is pre-filled with. */
     @Bean
     CommandLineRunner seedDemoUser(UserRepository users, PasswordEncoder encoder) {
+        return args -> {
+            if (users.findByEmail("researcher@cloudrecon.ai").isEmpty()) {
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+// TODO: Complete remaining logic for this module (WIP Week 8)

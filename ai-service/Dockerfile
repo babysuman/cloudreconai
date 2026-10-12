@@ -16,3 +16,6 @@ RUN pip install --no-cache-dir --upgrade pip \
     --extra-index-url https://download.pytorch.org/whl/cpu \
     torch torchvision \
  && pip install --no-cache-dir -r requirements.txt \
+ && find /usr/local/lib/python3.11 -name "*.pyc" -delete \
+ && find /usr/local/lib/python3.11 -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
+

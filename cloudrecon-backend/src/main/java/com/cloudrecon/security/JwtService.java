@@ -22,5 +22,9 @@ public class JwtService {
     public String create(String email) {
         long now = System.currentTimeMillis();
         return Jwts.builder().subject(email).issuedAt(new Date(now)).expiration(new Date(now + ttlMs)).signWith(key).compact();
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+    /** Returns the email in the token, or null if the token is invalid or expired. */
+    public String verify(String token) {
+
+// TODO: Complete remaining logic for this module (WIP Week 8)

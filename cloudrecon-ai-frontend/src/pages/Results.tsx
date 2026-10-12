@@ -35,3 +35,8 @@ export default function Results(){
    </section>
    <aside className="result-side">
     <div className="panel quality-card"><div className="section-kicker">QUALITY SCORE</div><div className="big-score">{job.reconstructionScore}<span>/100</span></div><p>Heuristic score from cloud removal and the amount of surrounding clear area. Validate against ground truth before operational use.</p><div className="quality-row"><span>Cloud coverage</span><b>{job.cloudCoverage}%</b></div><div className="quality-row"><span>Cloud removal</span><b>{job.cloudRemoval}%</b></div><div className="quality-row"><span>Confidence</span><b>{job.confidence}%</b></div><div className="quality-row"><span>Processing time</span><b>{job.duration}</b></div></div>
+    <div className="panel model-card"><Sparkles/><div><b>Engine</b><span>{engineName(job.engine)}</span></div><button onClick={reprocess}><RefreshCcw size={15}/> Reprocess</button></div>
+   </aside>
+  </div>
+  {report ? <section className="panel" style={{marginTop:24,padding:24}}>
+   <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:12}}><div><div className="section-kicker">SITUATION REPORT</div><h2 style={{margin:'4px 0 0'}}>{report.title}</h2><small>Generated {report.generatedAt}</small></div><div style={{display:'flex',gap:8}}><button className="btn btn-ghost" onClick={saveReport}><FileText size={16}/> Download report</button><button className="btn btn-ghost" onClick={()=>window.print()}><Printer size={16}/> Print</button></div></div>

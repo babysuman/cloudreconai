@@ -51,3 +51,10 @@ services:
       MAX_SIDE:       ${AI_MAX_SIDE:-1024}
     networks: [cloudrecon]
 
+  # ── React/Nginx frontend (HTTP + HTTPS) ─────────────────────────────────────
+  frontend:
+    build:
+      context: ./cloudrecon-ai-frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: /api

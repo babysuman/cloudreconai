@@ -68,5 +68,15 @@ public class ApiController {
         Job j = jobs.owned(id, auth.getName());
         String base = j.filename.replaceAll("\\.[^.]+$", "");
         return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG)
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        ContentDisposition.attachment().filename(base + "_reconstructed.png").build().toString())
+                .body(new FileSystemResource(jobs.imagePath(id, auth.getName(), "output")));
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+    @GetMapping("/history")
+    public List<JobDto> history(Authentication auth) {
+        return jobs.history(auth.getName()).stream().map(JobDto::from).toList();
+    }
+
+
+// TODO: Complete remaining logic for this module (WIP Week 8)

@@ -19,3 +19,6 @@ export async function uploadSatelliteImage(file: File, composite: 'false-color' 
   if (reference) form.append('reference', reference)
   return api.post('/images/upload', form)
 }
+
+export const startAnalysis = (imageId: string) => api.post('/analysis/start', { imageId })
+export const getAnalysis = (id: string) => api.get(`/analysis/${id}`)

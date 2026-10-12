@@ -11,3 +11,5 @@
     "strict": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,

@@ -27,3 +27,7 @@ Demo user (created on first start): `researcher@cloudrecon.ai` / `demo123`.
 
 ## Settings (`application.properties`)
 - `JWT_SECRET` environment variable: set a long random secret (32+ characters) outside development.
+- `AI_SERVICE_URL`: optional URL of the Python generative service (`POST /reconstruct`, PNG in, PNG out). Empty uses the built-in Java engine.
+- `app.cors-origins`: allowed frontend origins.
+- Database is H2 in `./data`; switch to PostgreSQL for production.
+

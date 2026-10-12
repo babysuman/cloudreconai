@@ -9,3 +9,5 @@ cloudrecon-backend/target/
 
 # Node
 cloudrecon-ai-frontend/node_modules/
+cloudrecon-ai-frontend/dist/
+

@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(exclude = UserDetailsServiceAutoConfiguration.class)
 @EnableJpaRepositories(considerNestedRepositories = true)
+public class CloudReconApplication {
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+// TODO: Complete remaining logic for this module (WIP Week 8)

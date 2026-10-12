@@ -61,3 +61,12 @@ function Shell() {
       <main className="main-area">
         <header className="topbar">
           <button className="icon-btn menu-btn" onClick={()=>setOpen(true)}><Menu/></button>
+          <div className="top-search"><Cloud size={16}/><span>Satellite intelligence workspace</span></div>
+          <div className="top-user"><div className="avatar">KS</div><div><b>Kundan Suman</b><small>Researcher</small></div></div>
+        </header>
+        <div className="page-content">
+          <Routes>
+            <Route path="/" element={<Dashboard/>}/>
+            <Route path="/upload" element={<Upload/>}/>
+            <Route path="/analysis" element={<Analysis/>}/>
+            <Route path="/results" element={<Results/>}/>

@@ -77,5 +77,17 @@ public class JobService {
         try {
             job.status = Job.Status.PROCESSING;
             jobs.save(job);
+            CloudEngine.Result r = engine.process(img, ref, job.composite, job.filename, stage -> { job.stage = stage; jobs.save(job); });
+            ImageIO.write(r.output(), "png", path(id, "output").toFile());
+            ImageIO.write(r.mask(), "png", path(id, "mask").toFile());
+            job.cloudCoverage = r.coverage();
+            job.cloudRemoval = r.cloudRemoval();
+            job.confidence = r.confidence();
+            job.reconstructionScore = r.score();
+            job.engine = r.engine();
+            job.report = r.report();
+            job.status = Job.Status.COMPLETED;
+        } catch (Throwable e) {
+            job.status = Job.Status.FAILED;
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+// TODO: Complete remaining logic for this module (WIP Week 8)

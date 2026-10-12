@@ -11,4 +11,6 @@ public final class Repos {
         Optional<AppUser> findByEmail(String email);
     }
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+    public interface JobRepository extends JpaRepository<Job, String> {
+
+// TODO: Complete remaining logic for this module (WIP Week 8)

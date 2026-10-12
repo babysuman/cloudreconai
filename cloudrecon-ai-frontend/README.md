@@ -42,3 +42,10 @@ Set the backend URL in a `.env` file:
 VITE_API_URL=http://localhost:8080/api
 ```
 
+The Axios client is in:
+
+`src/services/api.ts`
+
+Expected backend endpoints can be added around:
+
+- `POST /api/auth/login`

@@ -21,5 +21,8 @@ public class Job {
     public double reconstructionScore;  // 0-100
     public String engine;
     public long durationMs;
+    public Instant createdAt = Instant.now();
+    @Column(length = 500) public String error;
+    public String composite = "false-color";   // false-color (LISS-IV FCC) or natural
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+// TODO: Complete remaining logic for this module (WIP Week 8)

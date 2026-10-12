@@ -36,5 +36,11 @@ public class SecurityConfig {
                 .anyRequest().authenticated())
             .exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
             .addFilterBefore(jwt, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+    @Bean
+    PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
+
+
+// TODO: Complete remaining logic for this module (WIP Week 8)

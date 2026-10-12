@@ -257,5 +257,42 @@ def health():
 
 def valid_bbox(img):
     """Bounding box (y0, y1, x0, x1) of the non-black part of an image."""
+    ys, xs = np.where(img.max(axis=2) >= 10)
+    if len(ys) == 0:
+        return 0, img.shape[0], 0, img.shape[1]
+    return ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
 
-# TODO: Implement rest of the logic (WIP Week 7)
+
+def refine_shift(bgr, ref, mask):
+    """Remove a small leftover offset between the two images (phase correlation on clear pixels)."""
+    h, w = mask.shape
+    ok = (mask == 0) & (bgr.max(axis=2) >= 10) & (ref.max(axis=2) >= 10)
+    if ok.sum() < 5000:
+        return ref
+    g1 = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY).astype(np.float32)
+    g2 = cv2.cvtColor(ref, cv2.COLOR_BGR2GRAY).astype(np.float32)
+    g1[~ok], g2[~ok] = g1[ok].mean(), g2[ok].mean()
+    (dx, dy), resp = cv2.phaseCorrelate(g1, g2, cv2.createHanningWindow((w, h), cv2.CV_32F))
+    if resp < 0.05 or max(abs(dx), abs(dy)) < 0.5 or abs(dx) > 0.1 * w or abs(dy) > 0.1 * h:
+        return ref
+    return cv2.warpAffine(ref, np.float32([[1, 0, -dx], [0, 1, -dy]]), (w, h), flags=cv2.INTER_LINEAR, borderValue=0)
+
+
+def fill_from_reference(bgr, ref, mask):
+    """Fill cloudy pixels from a cloud-free image of the same area (another date).
+    Returns (image, leftover_mask, share_filled_from_reference, updated_cloud_mask)."""
+    h, w = mask.shape
+    # 1. Align: fit the valid (non-black) area of the reference onto the valid area of the main image
+    y0, y1, x0, x1 = valid_bbox(bgr)
+    ry0, ry1, rx0, rx1 = valid_bbox(ref)
+    canvas = np.zeros_like(bgr)
+    canvas[y0:y1, x0:x1] = cv2.resize(ref[ry0:ry1, rx0:rx1], (x1 - x0, y1 - y0), interpolation=cv2.INTER_AREA)
+    ref = refine_shift(bgr, canvas, mask)
+    ref_nodata = cv2.dilate((ref.max(axis=2) < 10).astype(np.uint8), np.ones((5, 5), np.uint8)) > 0
+    ref_clouds = (cloud_mask(ref) > 0) | ref_nodata          # reference pixels we must not copy
+
+    # 2. Match brightness and contrast to the main image
+    clear = (mask == 0) & (~ref_clouds)
+    diff = np.abs(bgr.astype(np.float32).mean(axis=2) - ref.astype(np.float32).mean(axis=2))
+
+# TODO: Implement rest of the logic (WIP Week 8)

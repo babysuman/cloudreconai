@@ -118,5 +118,22 @@ public class CloudEngine {
                     int i = y * w + x;
                     if (known[i]) continue;
                     int r = 0, g = 0, b = 0, c = 0;
+                    for (int dy = -1; dy <= 1; dy++) {
+                        for (int dx = -1; dx <= 1; dx++) {
+                            int nx = x + dx, ny = y + dy;
+                            if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue;
+                            int j = ny * w + nx;
+                            if (!known[j]) continue;
+                            r += (px[j] >> 16) & 255; g += (px[j] >> 8) & 255; b += px[j] & 255; c++;
+                        }
+                    }
+                    if (c > 0) { idx[n] = i; col[n++] = ((r / c) << 16) | ((g / c) << 8) | (b / c); }
+                }
+            }
+            if (n == 0) break;
+            for (int k = 0; k < n; k++) { px[idx[k]] = col[k]; known[idx[k]] = true; }
+            remaining -= n;
+        }
+        BufferedImage out = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 
-// TODO: Complete remaining logic for this module (WIP Week 7)
+// TODO: Complete remaining logic for this module (WIP Week 8)

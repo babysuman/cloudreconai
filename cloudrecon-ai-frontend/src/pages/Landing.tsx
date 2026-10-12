@@ -38,3 +38,9 @@ export default function Landing() {
       </section>
 
       <section className="feature-strip" id="technology">
+        <div><CloudOff/><b>Cloud detection</b><span>Identify cloud-obscured regions.</span></div>
+        <div><Layers3/><b>Generative reconstruction</b><span>Rebuild missing visual information.</span></div>
+        <div><Eye/><b>Quality assessment</b><span>Compare and validate outputs.</span></div>
+      </section>
+
+      <section className="workflow-section" id="workflow">
