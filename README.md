@@ -21,11 +21,11 @@
 
 | Name | Role in Project | Email | GitHub |
 | :--- | :--- | :--- | :--- |
-| **Aarav Sharma** (Member 1) | Frontend & UI/UX Design | `aarav.sharma@cloudrecon.ai` | [@aaravsharma](https://github.com) |
-| **Rohan Patel** (Member 2) | Backend (Spring Boot & Auth) | `rohan.patel@cloudrecon.ai` | [@rohanpatel](https://github.com) |
-| **Manvendra Singh** (Member 3 - **Lead**) | Database (MySQL & Storage) & DevOps | `manavvinaysingh8@gmail.com` | [@manvendrahub](https://github.com/manvendrahub) |
-| **Vikram Malhotra** (Member 4) | AI Integration (Python/FastAPI) | `vikram.malhotra@cloudrecon.ai` | [@vikrammalhotra](https://github.com) |
-| **Neha Verma** (Member 5) | Analytics, Testing & Documentation | `neha.verma@cloudrecon.ai` | [@nehaverma](https://github.com) |
+| **Pragati Singh** (Member 1) | Frontend & UI/UX Design | `pragati.singh@cloudrecon.ai` | [@pragatisingh](https://github.com) |
+| **Mansi Gaur** (Member 2) | Backend (Spring Boot & Auth) | `mansi.gaur@cloudrecon.ai` | [@mansigaur](https://github.com) |
+| **Manvendra Singh** (Member 3 - **Team Lead**) | Database (MySQL & Storage) & Cloud Deployment | `manavvinaysingh8@gmail.com` | [@manvendrahub](https://github.com/manvendrahub) |
+| **Kalpana Dinodiya** (Member 4) | AI Integration (Python/FastAPI) | `kalpana.dinodiya@cloudrecon.ai` | [@kalpanadinodiya](https://github.com) |
+| **Kundan Suman** (Member 5) | Documentation, Analytics & Testing | `kundan.suman@cloudrecon.ai` | [@kundansuman](https://github.com) |
 
 ---
 
@@ -68,44 +68,20 @@ CloudRecon implements strict Role-Based Access Control (RBAC) at the Spring Secu
 The CloudRecon system operates as a distributed microservice architecture comprising an interactive client workspace, a central Spring Boot orchestrator, an isolated high-performance AI inference engine, and a relational persistence layer.
 
 ```mermaid
-flowchart TD
-    subgraph Client ["Client Tier (Browser)"]
-        UI["React 19 Light-Mode UI"]
-        Viewer["Interactive A/B Split Comparison"]
-    end
+graph TD
+    Client["Client Tier: React 19 Light-Mode UI"]
+    Gateway["Reverse Proxy: Nginx (SSL/TLS 1.3 - Port 443/80)"]
+    AppTier["Application Tier: Spring Boot 3.5 (Java 21)"]
+    Storage["Volume Storage: /app/data/files"]
+    AIEngine["AI Tier: FastAPI (Python 3.11 - Port 8000)"]
+    DataTier[("Database: MySQL 8.4 Enterprise")]
 
-    subgraph Gateway ["Reverse Proxy & Web Server"]
-        NGINX["Nginx (SSL / TLS 1.3 Termination - Port 443/80)"]
-    end
-
-    subgraph AppTier ["Application Tier"]
-        SB["Spring Boot 3.5 Orchestrator (Java 21)"]
-        JWT["Stateless JWT Authentication Filter"]
-        Storage["Local Volume Storage /app/data/files"]
-    end
-
-    subgraph AIEngine ["Inference Tier (Python FastAPI)"]
-        API["FastAPI App (Uvicorn - Port 8000)"]
-        DCP["Dark Channel Cloud & Shadow Detector"]
-        LAMA["LaMa Generative Inpainter / OpenCV Engine"]
-        LC["Land-Cover Classifier & Situation Reporter"]
-    end
-
-    subgraph DataTier ["Persistence Tier"]
-        DB[("MySQL 8.4 Enterprise Database")]
-    end
-
-    UI -->|HTTPS:443| NGINX
-    NGINX -->|Reverse Proxy /api/*| SB
-    NGINX -->|Static Asset Servicing| UI
-    SB --> JWT
-    JWT --> DB
-    SB -->|Async HTTP Multipart Upload| API
-    API --> DCP
-    DCP --> LAMA
-    LAMA --> LC
-    LC -->|JSON Result & Base64 PNGs| SB
-    SB --> Storage
+    Client -->|HTTPS Request| Gateway
+    Gateway -->|Proxy API| AppTier
+    AppTier -->|Persist Metadata| DataTier
+    AppTier -->|Async Inpainting Request| AIEngine
+    AIEngine -->|Mask and Inpainted PNG| AppTier
+    AppTier -->|Save Rasters| Storage
 ```
 
 ### Functional Modules
@@ -156,20 +132,18 @@ Visualizes interactions between the **Analyst**, **Administrator**, and **Data A
 * *Administrator*: Train / Fine-tune Generative Model, Manage Service Health.
 
 ```mermaid
-flowchart LR
-    Analyst((Analyst))
-    Admin((Administrator))
-    Archive((Data Archive))
+graph LR
+    Analyst["Analyst"]
+    Admin["Administrator"]
+    Archive["Data Archive"]
 
-    subgraph CloudReconSystem ["Cloud Removal System"]
-        UC1(["Upload LISS-IV Scene"])
-        UC2(["Preprocess and Tile"])
-        UC3(["Detect Cloud/Shadow Mask"])
-        UC4(["Reconstruct Cloud-Free Image"])
-        UC5(["Evaluate Quality Metrics (PSNR/SSIM)"])
-        UC6(["Export GeoTIFF & Report"])
-        UC7(["Train / Fine-tune Model"])
-    end
+    UC1["Upload LISS-IV Scene"]
+    UC2["Preprocess and Tile"]
+    UC3["Detect Cloud/Shadow Mask"]
+    UC4["Reconstruct Cloud-Free Image"]
+    UC5["Evaluate Quality Metrics"]
+    UC6["Export GeoTIFF and Report"]
+    UC7["Train / Fine-tune Model"]
 
     Analyst --> UC1
     Analyst --> UC2
@@ -179,8 +153,7 @@ flowchart LR
     Analyst --> UC6
 
     Admin --> UC7
-
-    UC1 <--> Archive
+    UC1 --- Archive
 ```
 
 #### 2. Class Diagram
@@ -257,49 +230,49 @@ classDiagram
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Analyst
+    actor Analyst as Analyst
     participant WebApp as React Frontend
     participant Server as Spring Boot API
     participant AI as FastAPI (LaMa)
     participant DB as MySQL DB
     participant Disk as File Storage
 
-    Analyst->>WebApp: Upload LISS-IV scene & select composite
+    Analyst->>WebApp: Upload LISS-IV scene and select composite
     WebApp->>Server: POST /api/images/upload (multipart)
     Server->>Disk: Persist original raster file
     Server->>DB: Insert Job (Status: UPLOADED)
-    Server-->>WebApp: Return imageId & code
+    Server-->>WebApp: Return imageId and code
     WebApp->>Server: POST /api/analysis/start
     Server->>DB: Update Job (Status: PROCESSING, stage: 2)
     Server->>AI: POST /process (image bytes, composite)
-    Note over AI: Detect cloud & shadow mask<br/>Run generative inpainting<br/>Classify land cover & report
+    Note over AI: Detect cloud and shadow mask<br/>Run generative inpainting<br/>Classify land cover and report
     AI-->>Server: JSON (output_png_b64, mask_png_b64, metrics, report)
     Server->>Disk: Persist mask and reconstructed files
     Server->>DB: Update Job (Status: COMPLETED, metrics, report)
     Server-->>WebApp: Job completed
-    WebApp->>Analyst: Render side-by-side comparison, metrics & Situation Report
+    WebApp->>Analyst: Render side-by-side comparison, metrics and Situation Report
 ```
 
 #### 4. Activity Diagram (Decision Flow)
 
 ```mermaid
-flowchart TD
-    Start([Upload LISS-IV Scene]) --> Preprocess[Radiometric Scaling & Tiling]
-    Preprocess --> MaskGen[Generate Cloud & Shadow Mask]
-    MaskGen --> CheckCloud{Cloud Coverage > 2%?}
-    CheckCloud -- No --> SkipInpainting[Retain Scene Unaltered]
-    CheckCloud -- Yes --> CheckRef{Cloud-Free Reference Provided?}
-    CheckRef -- Yes --> RefAlign[Phase Correlation & Affine Alignment]
-    RefAlign --> RefFill[Fill from Aligned Reference]
-    CheckRef -- No --> Inpaint[Run Generative Inpainting LaMa]
-    RefFill --> Blend[Mask-Aware Soft Blending]
+graph TD
+    Start["Upload LISS-IV Scene"] --> Preprocess["Radiometric Scaling and Tiling"]
+    Preprocess --> MaskGen["Generate Cloud and Shadow Mask"]
+    MaskGen --> CheckCloud{"Cloud Coverage > 2%?"}
+    CheckCloud -->|No| SkipInpainting["Retain Scene Unaltered"]
+    CheckCloud -->|Yes| CheckRef{"Cloud-Free Reference Available?"}
+    CheckRef -->|Yes| RefAlign["Phase Correlation & Affine Alignment"]
+    RefAlign --> RefFill["Fill from Aligned Reference"]
+    CheckRef -->|No| Inpaint["Run Generative Inpainting (LaMa)"]
+    RefFill --> Blend["Mask-Aware Soft Blending"]
     Inpaint --> Blend
     SkipInpainting --> Blend
-    Blend --> ComputeMetrics[Compute Removal Rate, Land Cover & Confidence]
-    ComputeMetrics --> QualityCheck{Quality Acceptable?}
-    QualityCheck -- No (Retry) --> Inpaint
-    QualityCheck -- Yes --> Export[Export Reconstructed GeoTIFF & Situation Report]
-    Export --> End([Done])
+    Blend --> ComputeMetrics["Compute Removal Rate, Land Cover & Confidence"]
+    ComputeMetrics --> QualityCheck{"Quality Acceptable?"}
+    QualityCheck -->|No (Retry)| Inpaint
+    QualityCheck -->|Yes| Export["Export Reconstructed GeoTIFF & Situation Report"]
+    Export --> EndNode["Processing Complete"]
 ```
 
 ---
@@ -358,7 +331,7 @@ CREATE TABLE jobs (
 
 ## Week 5
 
-## 1. Member 1: Frontend & UI/UX Design
+## 1. Member 1: Pragati Singh — Frontend & UI/UX Design
 
 ### Module Role
 **Lead UI/UX Architect & Client State Specialist.**
@@ -382,7 +355,7 @@ CREATE TABLE jobs (
 
 ## Week 6
 
-## 2. Member 2: Backend (Spring Boot & Auth)
+## 2. Member 2: Mansi Gaur — Backend (Spring Boot & Auth)
 
 ### Module Role
 **Core Backend Architect & Security Engineer.**
@@ -404,7 +377,7 @@ CREATE TABLE jobs (
 
 ---
 
-## 3. Member 3: Database (MySQL & Storage) (Lead)
+## 3. Member 3: Manvendra Singh — Database (MySQL & Storage) (Team Lead)
 
 ### Module Role
 **Database Administrator, DevOps & Cloud Deployment Lead.**
@@ -428,7 +401,7 @@ CREATE TABLE jobs (
 
 ## Week 7
 
-## 4. Member 4: AI Integration (Python/FastAPI)
+## 4. Member 4: Kalpana Dinodiya — AI Integration (Python/FastAPI)
 
 ### Module Role
 **Computer Vision & Deep Learning Specialist.**
@@ -452,7 +425,7 @@ CREATE TABLE jobs (
 
 ## Week 8
 
-## 5. Member 5: Analytics, Testing & Documentation
+## 5. Member 5: Kundan Suman — Documentation, Analytics & Testing
 
 ### Module Role
 **Quality Assurance Lead & Scientific Reporting Engineer.**
@@ -478,11 +451,11 @@ CREATE TABLE jobs (
 
 | Module | Primary Owner | Secondary | Key Technologies |
 | :--- | :--- | :--- | :--- |
-| **Interactive Client UI** | Aarav Sharma (Mem 1) | Neha Verma (Mem 5) | React 19, TypeScript, Vite, Recharts, Lucide Icons |
-| **Backend & Security** | Rohan Patel (Mem 2) | Manvendra Singh (Mem 3) | Java 21, Spring Boot 3.5, Spring Security, JJWT |
-| **Database & DevOps** | Manvendra Singh (Mem 3) | Rohan Patel (Mem 2) | MySQL 8.4, Docker Compose, AWS EC2, Nginx, Certbot |
-| **AI Inpainting Engine** | Vikram Malhotra (Mem 4) | Neha Verma (Mem 5) | Python 3.11, FastAPI, PyTorch (CPU), OpenCV, LaMa |
-| **Reporting & Testing** | Neha Verma (Mem 5) | Aarav Sharma (Mem 1) | Postman, JUnit, HTML Report Generator, UML Suite |
+| **Interactive Client UI** | Pragati Singh (Mem 1) | Kundan Suman (Mem 5) | React 19, TypeScript, Vite, Recharts, Lucide Icons |
+| **Backend & Security** | Mansi Gaur (Mem 2) | Manvendra Singh (Mem 3) | Java 21, Spring Boot 3.5, Spring Security, JJWT |
+| **Database & DevOps** | Manvendra Singh (Mem 3) | Mansi Gaur (Mem 2) | MySQL 8.4, Docker Compose, AWS EC2, Nginx, Certbot |
+| **AI Inpainting Engine** | Kalpana Dinodiya (Mem 4) | Kundan Suman (Mem 5) | Python 3.11, FastAPI, PyTorch (CPU), OpenCV, LaMa |
+| **Reporting & Testing** | Kundan Suman (Mem 5) | Pragati Singh (Mem 1) | Postman, JUnit, HTML Report Generator, UML Suite |
 
 ---
 
@@ -493,13 +466,13 @@ CREATE TABLE jobs (
 During Week 9, all five modules were unified and evaluated under realistic multi-spectral satellite scenarios:
 
 ```
-[Raw Scene Upload (Mem 1)] ──> [Spring Boot Multipart Handling (Mem 2)]
-                                          │
-                                          ▼
-[MySQL Job & Metadata (Mem 3)] <── [FastAPI Inpainting Pipeline (Mem 4)]
-                                          │
-                                          ▼
-[Interactive Compare & HTML Report (Mem 5)] <── [Mask-Aware Clear Blending]
+[Raw Scene Upload (Pragati)] ──> [Spring Boot Multipart Handling (Mansi)]
+                                            │
+                                            ▼
+[MySQL Job & Metadata (Manvendra)] <── [FastAPI Inpainting Pipeline (Kalpana)]
+                                            │
+                                            ▼
+[Interactive Compare & HTML Report (Kundan)] <── [Mask-Aware Clear Blending]
 ```
 
 ### Problems Faced During Integration
