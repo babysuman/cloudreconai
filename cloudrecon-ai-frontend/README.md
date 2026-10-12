@@ -49,3 +49,9 @@ The Axios client is in:
 Expected backend endpoints can be added around:
 
 - `POST /api/auth/login`
+- `POST /api/images/upload`
+- `POST /api/analysis/start`
+- `GET /api/analysis/{id}`
+- `GET /api/results/{id}`
+- `GET /api/history`
+

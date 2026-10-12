@@ -89,5 +89,16 @@ public class JobService {
             job.status = Job.Status.COMPLETED;
         } catch (Throwable e) {
             job.status = Job.Status.FAILED;
+            job.error = String.valueOf(e.getMessage());
+        } finally {
+            job.durationMs = System.currentTimeMillis() - t0;
+            jobs.save(job);
+        }
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+    public Job owned(String id, String owner) {
+        return jobs.findByIdAndOwner(id, owner)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Job not found"));
+    }
+
+// TODO: Complete remaining logic for this module (WIP Week 9)

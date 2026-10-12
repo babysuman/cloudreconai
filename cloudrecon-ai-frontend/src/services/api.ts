@@ -22,3 +22,6 @@ export async function uploadSatelliteImage(file: File, composite: 'false-color' 
 
 export const startAnalysis = (imageId: string) => api.post('/analysis/start', { imageId })
 export const getAnalysis = (id: string) => api.get(`/analysis/${id}`)
+export const getResult = (id: string) => api.get(`/results/${id}`)
+export const getHistory = () => api.get('/history')
+export const getStats = () => api.get('/dashboard/stats')

@@ -11,3 +11,5 @@ opencv-python-headless
 # c7i instances have no GPU, CPU-only is correct
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch
+torchvision
+

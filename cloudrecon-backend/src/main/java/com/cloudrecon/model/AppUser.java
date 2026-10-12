@@ -14,5 +14,7 @@ public class AppUser {
     public String name;
 
     protected AppUser() {}
+    public AppUser(String email, String passwordHash, String name) {
+        this.email = email; this.passwordHash = passwordHash; this.name = name;
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+// TODO: Complete remaining logic for this module (WIP Week 9)

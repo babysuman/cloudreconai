@@ -70,3 +70,12 @@ function Shell() {
             <Route path="/upload" element={<Upload/>}/>
             <Route path="/analysis" element={<Analysis/>}/>
             <Route path="/results" element={<Results/>}/>
+            <Route path="/history" element={<HistoryPage/>}/>
+            <Route path="/settings" element={<div className="empty-state"><Settings size={38}/><h2>Settings</h2><p>Connect this screen to your Spring Boot user preferences API.</p></div>}/>
+          </Routes>
+        </div>
+      </main>
+    </div>
+  )
+}
+

@@ -19,3 +19,6 @@ RUN pip install --no-cache-dir --upgrade pip \
  && find /usr/local/lib/python3.11 -name "*.pyc" -delete \
  && find /usr/local/lib/python3.11 -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
 
+COPY app.py .
+
+EXPOSE 8000

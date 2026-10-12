@@ -78,5 +78,15 @@ public class ApiController {
         return jobs.history(auth.getName()).stream().map(JobDto::from).toList();
     }
 
+    @GetMapping("/dashboard/stats")
+    public Stats stats(Authentication auth) {
+        List<Job> all = jobs.history(auth.getName());
+        List<Job> done = all.stream().filter(j -> j.status == Job.Status.COMPLETED).toList();
+        double cloud = done.stream().mapToDouble(j -> j.cloudCoverage).average().orElse(0);
+        double score = done.stream().mapToDouble(j -> j.reconstructionScore).average().orElse(0);
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+        LocalDate today = LocalDate.now();
+        ZoneId zone = ZoneId.systemDefault();
+        List<Activity> activity = new ArrayList<>();
+
+// TODO: Complete remaining logic for this module (WIP Week 9)

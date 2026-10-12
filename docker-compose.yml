@@ -58,3 +58,11 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_URL: /api
+    restart: unless-stopped
+    depends_on: [backend]
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    networks: [cloudrecon]

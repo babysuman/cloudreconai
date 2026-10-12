@@ -44,3 +44,9 @@ export default function Landing() {
       </section>
 
       <section className="workflow-section" id="workflow">
+        <div className="section-kicker">FROM IMAGE TO INSIGHT</div>
+        <h2>A focused satellite-imagery workflow.</h2>
+        <div className="workflow">
+          {['Upload LISS-IV imagery','Detect clouds & generate mask','Run generative reconstruction','Review, compare & export'].map((x,i)=>(
+            <div className="workflow-card" key={x}><span>0{i+1}</span><h3>{x}</h3><p>{['Upload imagery into a controlled processing workspace.','Estimate cloud coverage and isolate affected pixels.','Send the prepared input to your AI reconstruction service.','Inspect metrics and download the reconstructed output.'][i]}</p></div>
+          ))}

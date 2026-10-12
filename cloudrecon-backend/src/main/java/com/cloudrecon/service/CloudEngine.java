@@ -135,5 +135,22 @@ public class CloudEngine {
             remaining -= n;
         }
         BufferedImage out = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        out.setRGB(0, 0, w, h, px, 0, w);
+        return out;
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+    private static ByteArrayResource named(BufferedImage img, String name) throws IOException {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        ImageIO.write(img, "png", b);
+        return new ByteArrayResource(b.toByteArray()) {
+            @Override public String getFilename() { return name; }
+        };
+    }
+
+    private Result remote(BufferedImage rgb, BufferedImage reference, String composite, String filename) throws IOException {
+        MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
+        parts.add("image", named(rgb, "image.png"));
+        if (reference != null) parts.add("reference", named(reference, "reference.png"));
+        parts.add("composite", composite);
+
+// TODO: Complete remaining logic for this module (WIP Week 9)

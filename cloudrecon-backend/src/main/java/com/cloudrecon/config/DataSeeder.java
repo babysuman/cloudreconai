@@ -14,5 +14,7 @@ public class DataSeeder {
     CommandLineRunner seedDemoUser(UserRepository users, PasswordEncoder encoder) {
         return args -> {
             if (users.findByEmail("researcher@cloudrecon.ai").isEmpty()) {
+                users.save(new AppUser("researcher@cloudrecon.ai", encoder.encode("demo123"), "Research User"));
+            }
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+// TODO: Complete remaining logic for this module (WIP Week 9)

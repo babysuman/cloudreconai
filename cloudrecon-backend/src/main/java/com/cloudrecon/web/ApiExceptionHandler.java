@@ -20,4 +20,7 @@ public class ApiExceptionHandler {
         return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
     }
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    ResponseEntity<Map<String, String>> tooLarge(MaxUploadSizeExceededException e) {
+
+// TODO: Complete remaining logic for this module (WIP Week 9)

@@ -22,3 +22,6 @@ COPY --from=build /app/target/*.jar app.jar
 
 # Directory for uploaded satellite files
 RUN mkdir -p /app/data/files && chown -R appuser:appgroup /app/data
+VOLUME /app/data
+
+USER appuser

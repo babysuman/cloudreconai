@@ -30,5 +30,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
         if (token != null) {
             String email = jwt.verify(token);
+            if (email != null) {
+                SecurityContextHolder.getContext()
+                        .setAuthentication(new UsernamePasswordAuthenticationToken(email, null, List.of()));
+            }
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+// TODO: Complete remaining logic for this module (WIP Week 9)

@@ -12,5 +12,7 @@ public final class Repos {
     }
 
     public interface JobRepository extends JpaRepository<Job, String> {
+        List<Job> findByOwnerOrderByCreatedAtDesc(String owner);
+        Optional<Job> findByIdAndOwner(String id, String owner);
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+// TODO: Complete remaining logic for this module (WIP Week 9)

@@ -18,3 +18,6 @@ export default function Login() {
         <form onSubmit={submit}>
           <label>Email<input value={email} onChange={e=>setEmail(e.target.value)} type="email" required/><Mail/></label>
           <label>Password<input value={password} onChange={e=>setPassword(e.target.value)} type="password" required/><LockKeyhole/></label>
+          <button className="btn btn-primary full">Sign in to workspace</button>
+        </form>
+        {error && <small className="demo-note">{error}</small>}

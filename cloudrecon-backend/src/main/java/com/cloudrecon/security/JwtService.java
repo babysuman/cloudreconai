@@ -26,5 +26,8 @@ public class JwtService {
 
     /** Returns the email in the token, or null if the token is invalid or expired. */
     public String verify(String token) {
+        try {
+            return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload().getSubject();
+        } catch (Exception e) {
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+// TODO: Complete remaining logic for this module (WIP Week 9)

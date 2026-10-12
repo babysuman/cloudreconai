@@ -35,5 +35,10 @@ public class AuthController {
     @PostMapping("/register")
     public AuthResponse register(@RequestBody RegisterRequest r) {
         if (r.email() == null || !r.email().contains("@") || r.password() == null || r.password().length() < 6) {
+            throw new IllegalArgumentException("Enter a valid email and a password of at least 6 characters.");
+        }
+        String email = r.email().trim().toLowerCase();
+        if (users.findByEmail(email).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "An account with this email already exists");
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+// TODO: Complete remaining logic for this module (WIP Week 9)

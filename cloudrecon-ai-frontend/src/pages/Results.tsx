@@ -40,3 +40,8 @@ export default function Results(){
   </div>
   {report ? <section className="panel" style={{marginTop:24,padding:24}}>
    <div style={{display:'flex',justifyContent:'space-between',flexWrap:'wrap',gap:12}}><div><div className="section-kicker">SITUATION REPORT</div><h2 style={{margin:'4px 0 0'}}>{report.title}</h2><small>Generated {report.generatedAt}</small></div><div style={{display:'flex',gap:8}}><button className="btn btn-ghost" onClick={saveReport}><FileText size={16}/> Download report</button><button className="btn btn-ghost" onClick={()=>window.print()}><Printer size={16}/> Print</button></div></div>
+   <p style={{marginTop:16}}>{report.summary}</p>
+   <div className="stats" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))',gap:12,margin:'16px 0'}}>
+    {([['Vegetation',report.landCover.vegetation],['Water / dark',report.landCover.water],['Bare / built-up',report.landCover.bareBuilt],['Cloud rebuilt',report.landCover.cloud]] as [string,number][]).map(([k,v])=><div key={k} style={{borderLeft:'3px solid #38b6c8',paddingLeft:10}}><div style={{opacity:.7,fontSize:13}}>{k}</div><b style={{fontSize:22}}>{v}%</b></div>)}
+   </div>
+   <h3>Observations</h3><ul>{report.observations.map((o:string,i:number)=><li key={i}>{o}</li>)}</ul>

@@ -27,4 +27,8 @@ public record JobDto(String id, String code, String filename, String status, int
                 FMT.format(j.createdAt), duration(j.durationMs, j.status), j.error, j.composite, j.report);
     }
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+    private static String duration(long ms, Job.Status s) {
+        if (s == Job.Status.PROCESSING) return "Running";
+        if (s == Job.Status.UPLOADED || s == Job.Status.QUEUED) return "Queued";
+
+// TODO: Complete remaining logic for this module (WIP Week 9)

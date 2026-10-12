@@ -294,5 +294,42 @@ def fill_from_reference(bgr, ref, mask):
     # 2. Match brightness and contrast to the main image
     clear = (mask == 0) & (~ref_clouds)
     diff = np.abs(bgr.astype(np.float32).mean(axis=2) - ref.astype(np.float32).mean(axis=2))
+    if clear.sum() > 500:                                       # ignore real changes between dates when matching colours
+        clear = clear & (diff <= np.percentile(diff[clear], 80))
+    adj = ref.astype(np.float32)
+    if clear.sum() > 500:
+        for c in range(3):
+            a, b = adj[:, :, c][clear], bgr[:, :, c][clear].astype(np.float32)
+            adj[:, :, c] = (adj[:, :, c] - a.mean()) / (a.std() + 1e-6) * b.std() + b.mean()
+    adj = np.clip(adj, 0, 255)
 
-# TODO: Implement rest of the logic (WIP Week 8)
+    # 3. Thin haze the brightness rule missed: greyish pixels much brighter than the reference
+    f = bgr.astype(np.float32)
+    bright, chroma = f.mean(axis=2), f.max(axis=2) - f.min(axis=2)
+    ring = max(15, int(min(h, w) * 0.05)) | 1                 # only the halo around detected cloud, not distant land
+    near = cv2.dilate(mask, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (ring, ring))) > 0
+    haze = ((bright - adj.mean(axis=2)) > 35) & (bright > 140) & (chroma <= 50) & near & (~ref_clouds) & (bgr.max(axis=2) >= 10)
+    haze = cv2.morphologyEx(haze.astype(np.uint8) * 255, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+    haze = cv2.dilate(haze, np.ones((5, 5), np.uint8))
+    haze[bgr.max(axis=2) < 10] = 0
+    mask = cv2.bitwise_or(mask, haze)
+
+    # 4. Copy reference pixels into the (updated) cloud mask with soft edges
+    usable = ((mask > 0) & (~ref_clouds)).astype(np.uint8) * 255
+    share = float((usable > 0).sum()) / max(1, int((mask > 0).sum()))
+    alpha = cv2.GaussianBlur(usable, (0, 0), sigmaX=3).astype(np.float32) / 255.0
+    alpha = (alpha * (cv2.dilate(mask, np.ones((3, 3), np.uint8)) > 0))[:, :, None]   # never touch clear pixels
+    out = np.clip(bgr * (1 - alpha) + adj * alpha, 0, 255).astype(np.uint8)
+    leftover = ((mask > 0) & ref_clouds).astype(np.uint8) * 255
+    return out, leftover, share, mask
+
+
+def run_pipeline(bgr, ref, composite, filename):
+    mask = cloud_mask(bgr)
+    share, thick_share = None, 1.0
+    if ref is not None:
+        out, leftover, share, mask = fill_from_reference(bgr, ref, mask)
+        if leftover.max() > 0:
+            out, _ = reconstruct(out, leftover)
+
+# TODO: Implement rest of the logic (WIP Week 9)

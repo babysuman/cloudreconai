@@ -31,3 +31,7 @@ Demo user (created on first start): `researcher@cloudrecon.ai` / `demo123`.
 - `app.cors-origins`: allowed frontend origins.
 - Database is H2 in `./data`; switch to PostgreSQL for production.
 
+## Notes
+- Input: 8-bit TIFF, PNG, JPEG. 16-bit multi-band GeoTIFF needs GeoTools or GDAL.
+- The quality score is a heuristic, not SSIM against ground truth.
+- Uploads of hundreds of MB need more heap, for example `-Xmx4g`.

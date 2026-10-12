@@ -6,3 +6,4 @@ export interface SatelliteJob {
   status: ProcessingStatus
   cloudCoverage: number
   reconstructionScore: number
+  date: string

@@ -11,3 +11,5 @@ cloudrecon-backend/target/
 cloudrecon-ai-frontend/node_modules/
 cloudrecon-ai-frontend/dist/
 
+# Python
+ai-service/__pycache__/

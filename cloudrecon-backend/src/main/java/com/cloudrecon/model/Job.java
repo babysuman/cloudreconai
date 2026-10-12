@@ -24,5 +24,8 @@ public class Job {
     public Instant createdAt = Instant.now();
     @Column(length = 500) public String error;
     public String composite = "false-color";   // false-color (LISS-IV FCC) or natural
+    @Lob public String report;                  // situation report as JSON
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+    protected Job() {}
+
+// TODO: Complete remaining logic for this module (WIP Week 9)

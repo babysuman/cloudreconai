@@ -42,5 +42,10 @@ public class SecurityConfig {
     @Bean
     PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
 
+    @Bean
+    CorsConfigurationSource corsConfigurationSource(@Value("${app.cors-origins}") List<String> origins) {
+        CorsConfiguration c = new CorsConfiguration();
+        c.setAllowedOrigins(origins);
+        c.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
-// TODO: Complete remaining logic for this module (WIP Week 8)
+// TODO: Complete remaining logic for this module (WIP Week 9)
