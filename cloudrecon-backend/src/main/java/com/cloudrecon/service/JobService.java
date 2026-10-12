@@ -66,5 +66,16 @@ public class JobService {
         jobs.save(job);
         BufferedImage img = ImageIO.read(path(id, "input").toFile());
         Path rp = path(id, "reference");
+        BufferedImage ref = Files.exists(rp) ? ImageIO.read(rp.toFile()) : null;
+        pool.submit(() -> run(id, img, ref));
+        return job;
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 6)
+    private void run(String id, BufferedImage img, BufferedImage ref) {
+        long t0 = System.currentTimeMillis();
+        Job job = jobs.findById(id).orElseThrow();
+        try {
+            job.status = Job.Status.PROCESSING;
+            jobs.save(job);
+
+// TODO: Complete remaining logic for this module (WIP Week 7)

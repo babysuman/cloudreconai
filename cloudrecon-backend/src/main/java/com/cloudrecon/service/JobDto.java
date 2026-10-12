@@ -19,5 +19,9 @@ public record JobDto(String id, String code, String filename, String status, int
         String status = switch (j.status) {
             case COMPLETED -> "Completed";
             case PROCESSING -> "Processing";
+            case FAILED -> "Failed";
+            default -> "Queued";
+        };
+        return new JobDto(j.id, j.code, j.filename, status, j.stage, j.cloudCoverage, j.cloudRemoval,
 
-// TODO: Complete remaining logic for this module (WIP Week 6)
+// TODO: Complete remaining logic for this module (WIP Week 7)

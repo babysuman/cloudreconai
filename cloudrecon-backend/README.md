@@ -23,3 +23,7 @@ Demo user (created on first start): `researcher@cloudrecon.ai` / `demo123`.
 | GET | /api/results/{id}/{input\|mask\|output} | PNG (accepts `?token=`) |
 | GET | /api/results/{id}/download | reconstructed PNG as attachment |
 | GET | /api/history | the user's jobs |
+| GET | /api/dashboard/stats | totals and 7-day activity |
+
+## Settings (`application.properties`)
+- `JWT_SECRET` environment variable: set a long random secret (32+ characters) outside development.

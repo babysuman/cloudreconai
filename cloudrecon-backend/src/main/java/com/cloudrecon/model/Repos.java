@@ -8,5 +8,7 @@ public final class Repos {
     private Repos() {}
 
     public interface UserRepository extends JpaRepository<AppUser, Long> {
+        Optional<AppUser> findByEmail(String email);
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 6)
+// TODO: Complete remaining logic for this module (WIP Week 7)

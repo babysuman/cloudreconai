@@ -17,5 +17,9 @@ public class Job {
     public int width, height;
     public double cloudCoverage;        // % of pixels masked
     public double cloudRemoval;         // % of detected cloud removed
+    public double confidence;
+    public double reconstructionScore;  // 0-100
+    public String engine;
+    public long durationMs;
 
-// TODO: Complete remaining logic for this module (WIP Week 6)
+// TODO: Complete remaining logic for this module (WIP Week 7)

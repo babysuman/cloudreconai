@@ -36,3 +36,9 @@ npm run build
 
 ## Spring Boot integration
 
+Set the backend URL in a `.env` file:
+
+```env
+VITE_API_URL=http://localhost:8080/api
+```
+

@@ -32,3 +32,9 @@ export default function Landing() {
           <div className="earth">
             <div className="continent c1"/><div className="continent c2"/><div className="continent c3"/>
             <div className="cloud cloud-a"/><div className="cloud cloud-b"/>
+          </div>
+          <div className="orbit-tag tag-a">LISS-IV</div><div className="orbit-tag tag-b">AI MODEL</div>
+        </div>
+      </section>
+
+      <section className="feature-strip" id="technology">

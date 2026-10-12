@@ -58,5 +58,15 @@ public class ApiController {
     }
 
     @GetMapping("/results/{id}/{kind}")
+    public ResponseEntity<Resource> image(@PathVariable String id, @PathVariable String kind, Authentication auth) {
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG)
+                .body(new FileSystemResource(jobs.imagePath(id, auth.getName(), kind)));
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 6)
+    @GetMapping("/results/{id}/download")
+    public ResponseEntity<Resource> download(@PathVariable String id, Authentication auth) {
+        Job j = jobs.owned(id, auth.getName());
+        String base = j.filename.replaceAll("\\.[^.]+$", "");
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG)
+
+// TODO: Complete remaining logic for this module (WIP Week 7)

@@ -52,3 +52,12 @@ function Shell() {
             <div className="storage-head"><Database size={15}/> Storage</div>
             <div className="progress"><i style={{width:'38%'}}/></div>
             <small>3.8 GB of 10 GB used</small>
+          </div>
+          <button className="logout" onClick={logout}><LogOut size={17}/> Sign out</button>
+        </div>
+      </aside>
+
+      {open && <div className="overlay" onClick={()=>setOpen(false)}/>}
+      <main className="main-area">
+        <header className="topbar">
+          <button className="icon-btn menu-btn" onClick={()=>setOpen(true)}><Menu/></button>

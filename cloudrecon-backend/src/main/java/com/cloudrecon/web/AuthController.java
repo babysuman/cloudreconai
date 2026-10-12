@@ -26,5 +26,9 @@ public class AuthController {
     @PostMapping("/login")
     public AuthResponse login(@RequestBody LoginRequest r) {
         AppUser u = users.findByEmail(r.email() == null ? "" : r.email().trim().toLowerCase()).orElse(null);
+        if (u == null || r.password() == null || !encoder.matches(r.password(), u.passwordHash)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong email or password");
+        }
+        return new AuthResponse(jwt.create(u.email), u.email, u.name);
 
-// TODO: Complete remaining logic for this module (WIP Week 6)
+// TODO: Complete remaining logic for this module (WIP Week 7)

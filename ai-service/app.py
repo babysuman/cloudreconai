@@ -220,5 +220,42 @@ def build_report(filename, composite, coverage, cloud_removal, confidence, lc, s
     if lc["bareBuilt"] >= 50:
         obs.append(f"Bare soil, fallow land or built-up area dominates ({lc['bareBuilt']}%).")
     recs = []
+    if ref_share is None and coverage >= 15:
+        recs.append("For accurate results, upload a cloud-free image of the same area from another date as a reference. A single image cannot show what is under thick cloud.")
+    if coverage >= 40:
+        recs.append("Cloud cover is high. Acquire another pass or a cloud-free date for decisions that need accuracy.")
+    if lc["water"] >= 25:
+        recs.append("Cross-check water extent with SAR data or a previous LISS-IV scene before reporting a flood.")
+    recs.append("Treat reconstructed areas as estimates. Validate against ground truth or a cloud-free scene before operational use.")
+    return {
+        "title": f"Situation report: {filename}",
+        "generatedAt": datetime.now().strftime("%d %b %Y, %H:%M"),
+        "summary": (f"{filename} ({shape[1]}x{shape[0]} px, {'false-colour' if composite == 'false-color' else 'natural-colour'}). "
+                    f"{coverage}% was obscured by cloud and rebuilt. After reconstruction the scene is about "
+                    f"{lc['vegetation']}% vegetation, {lc['water']}% water or dark surface and {lc['bareBuilt']}% bare soil or built-up land."),
+        "quality": {"label": quality, "cloudCoverage": coverage, "confidence": confidence, "engine": engine},
+        "landCover": {**lc, "cloud": coverage},
+        "observations": obs,
+        "recommendations": recs,
+        "limitations": [
+            "Land cover is a simple colour and index classification, not a trained classifier.",
+            "Reconstructed pixels are model estimates, not measurements.",
+            "A single image cannot show change over time. Use two dates to detect change.",
+        ],
+    }
 
-# TODO: Implement rest of the logic (WIP Week 6)
+
+def b64png(arr: np.ndarray) -> str:
+    ok, buf = cv2.imencode(".png", arr)
+    return base64.b64encode(buf.tobytes()).decode()
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok", "engine": ENGINE, "gemini": _gemini is not None}
+
+
+def valid_bbox(img):
+    """Bounding box (y0, y1, x0, x1) of the non-black part of an image."""
+
+# TODO: Implement rest of the logic (WIP Week 7)

@@ -12,3 +12,5 @@ export default function Upload(){
   <div className="upload-layout">
    <section className="panel upload-panel">
     {!file ? <div className={`dropzone ${drag?'drag':''}`} onDragOver={e=>{e.preventDefault();setDrag(true)}} onDragLeave={()=>setDrag(false)} onDrop={e=>{e.preventDefault();setDrag(false);choose(e.dataTransfer.files[0])}} onClick={()=>ref.current?.click()}>
+      <input ref={ref} hidden type="file" accept=".tif,.tiff,.png,.jpg,.jpeg" onChange={e=>choose(e.target.files?.[0])}/>
+      <div className="upload-icon"><UploadCloud size={30}/></div><h2>Drop your satellite image here</h2><p>or click to browse from your computer</p><span>GeoTIFF, TIFF, PNG or JPEG · Max 500 MB</span>

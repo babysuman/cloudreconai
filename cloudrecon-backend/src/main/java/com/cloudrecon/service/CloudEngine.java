@@ -101,5 +101,22 @@ public class CloudEngine {
                 for (int k = Math.max(0, y - r); k <= Math.min(h - 1, y + r) && !b[y * w + x]; k++)
                     if (a[k * w + x]) b[y * w + x] = true;
         return b;
+    }
 
-// TODO: Complete remaining logic for this module (WIP Week 6)
+    /** Fills cloudy pixels from the outside in, averaging known neighbours on each pass. */
+    private BufferedImage inpaint(BufferedImage img, boolean[] cloud, int w, int h) {
+        int[] px = img.getRGB(0, 0, w, h, null, 0, w);
+        boolean[] known = new boolean[px.length];
+        int remaining = 0;
+        for (int i = 0; i < px.length; i++) { known[i] = !cloud[i]; if (cloud[i]) remaining++; }
+        int[] idx = new int[Math.max(remaining, 1)], col = new int[idx.length];
+
+        for (int pass = 0; remaining > 0 && pass < Math.max(w, h); pass++) {
+            int n = 0;
+            for (int y = 0; y < h; y++) {
+                for (int x = 0; x < w; x++) {
+                    int i = y * w + x;
+                    if (known[i]) continue;
+                    int r = 0, g = 0, b = 0, c = 0;
+
+// TODO: Complete remaining logic for this module (WIP Week 7)

@@ -10,5 +10,7 @@ public class AppUser {
     @Column(unique = true, nullable = false)
     public String email;
     @Column(nullable = false)
+    public String passwordHash;
+    public String name;
 
-// TODO: Complete remaining logic for this module (WIP Week 6)
+// TODO: Complete remaining logic for this module (WIP Week 7)

@@ -24,3 +24,7 @@ server {\n\
   ssl_certificate /etc/letsencrypt/live/cloudreconai.mooo.com/fullchain.pem;\n\
   ssl_certificate_key /etc/letsencrypt/live/cloudreconai.mooo.com/privkey.pem;\n\
   ssl_protocols TLSv1.2 TLSv1.3;\n\
+  ssl_ciphers HIGH:!aNULL:!MD5;\n\
+  root /usr/share/nginx/html;\n\
+  index index.html;\n\
+  location /api/ {\n\

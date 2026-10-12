@@ -10,5 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class DataSeeder {
     /** Creates the demo account the frontend login form is pre-filled with. */
+    @Bean
+    CommandLineRunner seedDemoUser(UserRepository users, PasswordEncoder encoder) {
 
-// TODO: Complete remaining logic for this module (WIP Week 6)
+// TODO: Complete remaining logic for this module (WIP Week 7)

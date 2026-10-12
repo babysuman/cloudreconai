@@ -29,3 +29,9 @@ export default function Results(){
      <img src={imageUrl(id,view)} alt="Result" style={fill}/>
      <img src={imageUrl(id,'input')} alt="Original" style={{...fill,clipPath:`inset(0 ${100-split}% 0 0)`}}/>
      <div style={{position:'absolute',top:0,bottom:0,left:split+'%',width:3,background:'#fff',pointerEvents:'none'}}/>
+     <input type="range" min={0} max={100} value={split} onChange={e=>setSplit(+e.target.value)} aria-label="Compare original and result" style={{position:'absolute',inset:0,width:'100%',height:'100%',opacity:0,cursor:'ew-resize'}}/>
+    </div>
+    <div className="compare-caption"><span>Left: original · Right: {view==='output'?'reconstructed':'cloud mask'}. Drag to compare.</span><b>{job.cloudRemoval}% of detected cloud removed</b></div>
+   </section>
+   <aside className="result-side">
+    <div className="panel quality-card"><div className="section-kicker">QUALITY SCORE</div><div className="big-score">{job.reconstructionScore}<span>/100</span></div><p>Heuristic score from cloud removal and the amount of surrounding clear area. Validate against ground truth before operational use.</p><div className="quality-row"><span>Cloud coverage</span><b>{job.cloudCoverage}%</b></div><div className="quality-row"><span>Cloud removal</span><b>{job.cloudRemoval}%</b></div><div className="quality-row"><span>Confidence</span><b>{job.confidence}%</b></div><div className="quality-row"><span>Processing time</span><b>{job.duration}</b></div></div>

@@ -16,3 +16,6 @@ export async function uploadSatelliteImage(file: File, composite: 'false-color' 
   const form = new FormData()
   form.append('file', file)
   form.append('composite', composite)
+  if (reference) form.append('reference', reference)
+  return api.post('/images/upload', form)
+}

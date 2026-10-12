@@ -19,5 +19,8 @@ public class JwtService {
         this.ttlMs = hours * 3_600_000L;
     }
 
+    public String create(String email) {
+        long now = System.currentTimeMillis();
+        return Jwts.builder().subject(email).issuedAt(new Date(now)).expiration(new Date(now + ttlMs)).signWith(key).compact();
 
-// TODO: Complete remaining logic for this module (WIP Week 6)
+// TODO: Complete remaining logic for this module (WIP Week 7)

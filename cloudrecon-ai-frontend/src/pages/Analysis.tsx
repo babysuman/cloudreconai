@@ -11,3 +11,5 @@ export default function Analysis(){
  useEffect(()=>{ if(!id) return; const t=setInterval(async()=>{ try{ const {data}=await getAnalysis(id); setJob(data); if(data.status==='Completed'){clearInterval(t); navigate('/app/results?job='+id)} if(data.status==='Failed') clearInterval(t) }catch{} },1000); return()=>clearInterval(t)},[id])
  return <div>
   <div className="page-heading"><div><div className="section-kicker">AI PIPELINE</div><h1>Reconstruction in progress</h1><p>{job?.filename ?? (id ? 'Loading…' : 'No job selected')} · Job {job?.code ?? ''}</p></div><span className="live-pill"><i/> Live processing</span></div>
+  <div className="analysis-grid">
+   <section className="panel pipeline-panel"><div className="panel-head"><div><h2>Generative reconstruction pipeline</h2><p>Your image is being processed by the AI service.</p></div><BrainCircuit/></div>

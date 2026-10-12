@@ -43,3 +43,11 @@ services:
   ai-service:
     build:
       context: ./ai-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL:   ${GEMINI_MODEL:-gemini-2.5-flash-image}
+      MAX_SIDE:       ${AI_MAX_SIDE:-1024}
+    networks: [cloudrecon]
+

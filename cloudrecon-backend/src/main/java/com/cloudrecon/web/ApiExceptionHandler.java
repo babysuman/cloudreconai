@@ -15,4 +15,6 @@ public class ApiExceptionHandler {
         return ResponseEntity.status(e.getStatusCode()).body(Map.of("error", String.valueOf(e.getReason())));
     }
 
-// TODO: Complete remaining logic for this module (WIP Week 6)
+    @ExceptionHandler(IllegalArgumentException.class)
+
+// TODO: Complete remaining logic for this module (WIP Week 7)

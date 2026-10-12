@@ -13,3 +13,6 @@ export default function Login() {
   return <div className="auth-page">
     <div className="auth-visual"><div className="auth-orb"/><div className="auth-copy"><div className="brand"><div className="brand-mark"><Satellite/></div><strong>CloudRecon AI</strong></div><h1>Turn obscured imagery into usable insight.</h1><p>A professional workspace for cloud detection, AI reconstruction and satellite-image quality assessment.</p></div></div>
     <div className="auth-panel">
+      <Link className="back-link" to="/">← Back to home</Link>
+      <div className="auth-form"><div className="auth-icon"><ShieldCheck/></div><div className="section-kicker">SECURE WORKSPACE</div><h2>Welcome back</h2><p>Sign in to continue your satellite analysis.</p>
+        <form onSubmit={submit}>

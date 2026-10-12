@@ -11,3 +11,6 @@ export default function Dashboard(){
   <div className="stat-grid">
    <Stat icon={Satellite} label="Images processed" value="128" trend="+14.2%" note="this month"/>
    <Stat icon={Cloud} label="Avg. cloud coverage" value="42.8%" trend="-6.4%" note="vs last month"/>
+   <Stat icon={Gauge} label="Avg. reconstruction" value="91.7%" trend="+3.8%" note="quality score"/>
+   <Stat icon={Cpu} label="AI jobs completed" value="96" trend="+21" note="this month"/>
+  </div>
